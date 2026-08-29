@@ -25,7 +25,7 @@ class ApkCloner(private val context: Context) {
 
         progressCallback?.invoke("Copying APK...", 10)
         // 1. Copy input to a temporary working file
-        val workingFile = File(context.cacheDir, "working.apk")
+        val workingFile = File(context.cacheDir, "working_${System.nanoTime()}.apk")
         inputApk.copyTo(workingFile, overwrite = true)
 
         progressCallback?.invoke("Patching Manifest & Resources...", 30)

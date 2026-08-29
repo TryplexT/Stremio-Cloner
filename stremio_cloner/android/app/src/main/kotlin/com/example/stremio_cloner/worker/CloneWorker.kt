@@ -45,15 +45,18 @@ class CloneWorker(context: Context, params: WorkerParameters) : CoroutineWorker(
             val outputFile = File(outputPath)
 
             cloner.clone(inputFile, outputFile, oldPackage, newPackage, appName, iconFiles, appColor) { msg, pct ->
-                notificationManager.notify(1, createNotification(msg, pct))
+                val notifId = outputPath?.hashCode() ?: 1
+                notificationManager.notify(notifId, createNotification(msg, pct))
                 setProgressAsync(androidx.work.workDataOf("pct" to pct))
             }
             
-            notificationManager.notify(1, createNotification("Clone Complete", 100, true))
+            val notifId = outputPath?.hashCode() ?: 1
+                notificationManager.notify(notifId, createNotification("Clone Complete", 100, true))
             Result.success()
         } catch (e: Exception) {
             e.printStackTrace()
-            notificationManager.notify(1, createNotification("Clone Failed", 0, false))
+            val notifId = outputPath?.hashCode() ?: 1
+                notificationManager.notify(notifId, createNotification("Clone Failed", 0, false))
             Result.failure()
         }
     }
