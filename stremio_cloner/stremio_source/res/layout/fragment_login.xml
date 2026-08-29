@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:padding="@dimen/login_frame_padding" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_gravity="start" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_stremio_logo_expanded" android:scaleType="fitCenter" android:adjustViewBounds="true" android:maxHeight="@dimen/login_logo_height" android:contentDescription="@null" />
+    <TextView android:textSize="26.0sp" android:layout_gravity="center_horizontal" android:id="@id/login_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_stremio_tv_login_title" />
+    <ImageView android:layout_gravity="center_horizontal" android:id="@id/login_qr_code" android:paddingTop="@dimen/login_spacing_padding" android:paddingBottom="@dimen/login_spacing_padding" android:layout_width="@dimen/login_qr_code_height" android:layout_height="@dimen/login_qr_code_height" android:scaleType="fitCenter" android:adjustViewBounds="true" android:contentDescription="@null" android:paddingVertical="@dimen/login_spacing_padding" />
+    <LinearLayout android:gravity="start" android:layout_gravity="center_horizontal" android:orientation="vertical" android:id="@id/login_frame_instructions" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:paddingTop="@dimen/login_instructions_padding" android:paddingBottom="@dimen/login_instructions_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingVertical="@dimen/login_instructions_padding">
+            <TextView android:textColor="?android:windowBackground" android:gravity="center" android:background="@drawable/circle" android:layout_width="@dimen/login_instruction_number_height" android:layout_height="@dimen/login_instruction_number_height" android:text="1" android:textAlignment="gravity" />
+            <View android:layout_width="@dimen/login_instructions_padding" android:layout_height="fill_parent" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_stremio_tv_login_step_one" android:includeFontPadding="false" />
+            <View android:layout_width="@dimen/login_instructions_padding" android:layout_height="fill_parent" />
+            <TextView android:textColor="@color/accentColor" android:id="@id/login_code_link" android:layout_width="wrap_content" android:layout_height="wrap_content" android:includeFontPadding="false" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:paddingTop="@dimen/login_instructions_padding" android:paddingBottom="@dimen/login_instructions_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingVertical="@dimen/login_instructions_padding">
+            <TextView android:textColor="?android:windowBackground" android:gravity="center" android:background="@drawable/circle" android:layout_width="@dimen/login_instruction_number_height" android:layout_height="@dimen/login_instruction_number_height" android:text="2" android:textAlignment="gravity" />
+            <View android:layout_width="@dimen/login_instructions_padding" android:layout_height="fill_parent" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_stremio_tv_login_step_two" android:includeFontPadding="false" />
+        </LinearLayout>
+    </LinearLayout>
+    <TextView android:textColor="?android:textColorSecondary" android:layout_gravity="center_horizontal" android:id="@id/login_code_status" android:paddingTop="@dimen/login_spacing_padding" android:paddingBottom="@dimen/login_spacing_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingVertical="@dimen/login_spacing_padding" />
+    <Button android:layout_gravity="center_horizontal" android:id="@id/login_btn_new_code" android:focusable="true" android:focusableInTouchMode="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_stremio_tv_login_new_link" android:backgroundTint="?android:colorBackground" />
+</LinearLayout>

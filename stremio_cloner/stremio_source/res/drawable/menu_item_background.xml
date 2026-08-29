@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="true">
+        <shape>
+            <solid android:color="?menuFocusedBackgroundColor" />
+            <stroke android:width="?menuBackgroundBorderSize" android:color="?menuFocusedBackgroundBorderColor" />
+            <corners android:radius="?menuCornerRadius" />
+            <padding android:left="?menuBackgroundPadding" android:top="?menuBackgroundPadding" android:right="?menuBackgroundPadding" android:bottom="?menuBackgroundPadding" />
+        </shape>
+    </item>
+    <item android:state_checked="true">
+        <shape>
+            <solid android:color="?menuSelectedBackgroundColor" />
+            <stroke android:width="?menuBackgroundBorderSize" android:color="?menuSelectedBackgroundBorderColor" />
+            <corners android:radius="?menuCornerRadius" />
+            <padding android:left="?menuBackgroundPadding" android:top="?menuBackgroundPadding" android:right="?menuBackgroundPadding" android:bottom="?menuBackgroundPadding" />
+        </shape>
+    </item>
+    <item android:color="?menuBackgroundColor">
+        <shape>
+            <solid android:color="?menuBackgroundColor" />
+            <stroke android:width="?menuBackgroundBorderSize" android:color="?menuBackgroundBorderColor" />
+            <corners android:radius="?menuCornerRadius" />
+            <padding android:left="?menuBackgroundPadding" android:top="?menuBackgroundPadding" android:right="?menuBackgroundPadding" android:bottom="?menuBackgroundPadding" />
+        </shape>
+    </item>
+</selector>

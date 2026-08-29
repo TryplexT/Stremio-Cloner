@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="vertical" android:padding="@dimen/dialog_xlarge_padding" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textColor="?colorAccent" android:paddingBottom="@dimen/dialog_large_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_network_status" android:textAllCaps="true" />
+    <LinearLayout android:orientation="horizontal" android:paddingTop="@dimen/dialog_small_padding" android:paddingBottom="@dimen/dialog_small_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingVertical="@dimen/dialog_small_padding">
+        <TextView android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/label_stream_speed" android:layout_weight="0.4" />
+        <TextView android:id="@id/dialog_stats_stream_speed" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="0.6" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:paddingTop="@dimen/dialog_small_padding" android:paddingBottom="@dimen/dialog_small_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingVertical="@dimen/dialog_small_padding">
+        <TextView android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/label_stream_buffered" android:layout_weight="0.4" />
+        <TextView android:id="@id/dialog_stats_stream_buffered" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="0.6" />
+    </LinearLayout>
+    <TextView android:textColor="?colorAccent" android:paddingTop="@dimen/dialog_large_padding" android:paddingBottom="@dimen/dialog_large_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_peers_info" android:textAllCaps="true" android:paddingVertical="@dimen/dialog_large_padding" />
+    <TextView android:id="@id/dialog_stats_info_hash" android:paddingTop="@dimen/dialog_small_padding" android:paddingBottom="@dimen/dialog_small_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingVertical="@dimen/dialog_small_padding" />
+    <LinearLayout android:orientation="horizontal" android:paddingTop="@dimen/dialog_small_padding" android:paddingBottom="@dimen/dialog_small_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:weightSum="0.9" android:paddingVertical="@dimen/dialog_small_padding">
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="0.3">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_peers_active" />
+            <TextView android:id="@id/dialog_stats_peers_active" android:paddingLeft="@dimen/dialog_small_padding" android:paddingRight="@dimen/dialog_small_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingHorizontal="@dimen/dialog_small_padding" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="0.3">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_peers_connected" />
+            <TextView android:id="@id/dialog_stats_peers_connected" android:paddingLeft="@dimen/dialog_small_padding" android:paddingRight="@dimen/dialog_small_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingHorizontal="@dimen/dialog_small_padding" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="0.3">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_peers_waiting" />
+            <TextView android:id="@id/dialog_stats_peers_waiting" android:paddingLeft="@dimen/dialog_small_padding" android:paddingRight="@dimen/dialog_small_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingHorizontal="@dimen/dialog_small_padding" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

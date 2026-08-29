@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <View android:id="@id/menu_backdrop" android:background="?colorBackdrop" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <LinearLayout android:orientation="vertical" android:id="@id/side_menu_frame" android:background="@android:color/transparent" android:paddingLeft="@dimen/side_menu_horizontal_padding_collapsed" android:paddingTop="@dimen/side_menu_horizontal_padding_expanded" android:paddingRight="@dimen/side_menu_horizontal_padding_collapsed" android:paddingBottom="@dimen/side_menu_horizontal_padding_expanded" android:layout_width="wrap_content" android:layout_height="fill_parent" android:elevation="5.0dip" android:paddingHorizontal="@dimen/side_menu_horizontal_padding_collapsed" android:paddingVertical="@dimen/side_menu_horizontal_padding_expanded">
+        <ImageView android:layout_gravity="center_horizontal" android:id="@id/menu_logo" android:layout_width="wrap_content" android:layout_height="@dimen/side_menu_logo_size" android:src="@drawable/ic_stremio_logo" android:adjustViewBounds="true" android:contentDescription="@null" />
+        <com.stremio.tv.layout.FocusFrameLayout android:layout_gravity="center_horizontal" android:id="@id/menu_list_frame" android:paddingLeft="@dimen/side_menu_horizontal_padding_collapsed" android:paddingRight="@dimen/side_menu_horizontal_padding_collapsed" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginStart="3.0dip" android:paddingHorizontal="@dimen/side_menu_horizontal_padding_collapsed">
+            <androidx.fragment.app.FragmentContainerView android:name="androidx.leanback.app.VerticalGridSupportFragment" android:id="@id/menu_list_fragment" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </com.stremio.tv.layout.FocusFrameLayout>
+    </LinearLayout>
+</FrameLayout>

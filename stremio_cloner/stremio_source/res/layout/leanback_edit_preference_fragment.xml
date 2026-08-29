@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/main_frame" android:background="?android:windowBackground" android:layout_width="fill_parent" android:layout_height="fill_parent" android:transitionGroup="false" android:elevation="@dimen/lb_preference_decor_elevation"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/decor_title_container" android:background="?defaultBrandColor" android:layout_width="fill_parent" android:layout_height="wrap_content" android:transitionGroup="false" android:elevation="@dimen/lb_preference_decor_title_container_elevation">
+        <TextView android:id="@id/decor_title" android:layout_width="fill_parent" android:layout_height="wrap_content" style="?android:titleTextStyle" />
+    </FrameLayout>
+    <TextView android:id="@android:id/message" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" style="?android:subtitleTextStyle" />
+    <EditText android:id="@android:id/edit" android:layout_width="fill_parent" android:layout_height="wrap_content" style="?android:editTextStyle" />
+</LinearLayout>

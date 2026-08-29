@@ -1,0 +1,14 @@
+.class public interface abstract Lcom/google/android/gms/internal/measurement/zzof;
+.super Ljava/lang/Object;
+.source "com.google.android.gms:play-services-measurement-impl@@22.2.0"
+
+
+# virtual methods
+.method public abstract zza()Z
+.end method
+
+.method public abstract zzb()Z
+.end method
+
+.method public abstract zzc()Z
+.end method
