@@ -1,0 +1,66 @@
+.class public final Lcom/google/android/gms/internal/measurement/zzaiw;
+.super Ljava/lang/Object;
+.source "com.google.android.gms:play-services-measurement-impl@@23.2.0"
+
+# interfaces
+.implements Lcom/google/android/gms/internal/measurement/zzaiv;
+
+
+# static fields
+.field public static final zza:Lcom/google/android/gms/internal/measurement/zzom;
+    .annotation runtime Ljava/lang/Deprecated;
+    .end annotation
+.end field
+
+
+# direct methods
+.method static constructor <clinit>()V
+    .locals 3
+
+    .line 1
+    invoke-static {}, Lcom/google/android/gms/internal/measurement/zzagr;->zzc()Lcom/google/android/gms/internal/measurement/zzog;
+
+    move-result-object v0
+
+    const-string v1, "measurement.client.sessions.enable_fix_background_engagement"
+
+    const/4 v2, 0x1
+
+    .line 2
+    invoke-virtual {v0, v1, v2}, Lcom/google/android/gms/internal/measurement/zzog;->zza(Ljava/lang/String;Z)Lcom/google/android/gms/internal/measurement/zzom;
+
+    move-result-object v0
+
+    sput-object v0, Lcom/google/android/gms/internal/measurement/zzaiw;->zza:Lcom/google/android/gms/internal/measurement/zzom;
+
+    return-void
+.end method
+
+.method public constructor <init>()V
+    .locals 0
+
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public final zza()Z
+    .locals 1
+
+    .line 1
+    sget-object v0, Lcom/google/android/gms/internal/measurement/zzaiw;->zza:Lcom/google/android/gms/internal/measurement/zzom;
+
+    invoke-interface {v0}, Lcom/google/android/gms/internal/measurement/zzom;->get()Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Ljava/lang/Boolean;
+
+    invoke-virtual {v0}, Ljava/lang/Boolean;->booleanValue()Z
+
+    move-result v0
+
+    return v0
+.end method

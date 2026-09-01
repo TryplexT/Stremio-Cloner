@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="exo_controls_playback_speeds">
+        <item>০.২৫ গুণ</item>
+        <item>০.৫ গুণ</item>
+        <item>০.৭৫ গুণ</item>
+        <item>সাধাৰণ</item>
+        <item>১.২৫ গুণ</item>
+        <item>১.৫ গুণ</item>
+        <item>২ গুণ</item>
+    </string-array>
+</resources>

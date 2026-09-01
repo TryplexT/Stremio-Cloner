@@ -1,0 +1,38 @@
+.class public final synthetic Landroidx/compose/foundation/style/StyleStateKt$$ExternalSyntheticLambda2;
+.super Ljava/lang/Object;
+.source "D8$$SyntheticClass"
+
+# interfaces
+.implements Lkotlin/jvm/functions/Function2;
+
+
+# direct methods
+.method public synthetic constructor <init>()V
+    .locals 0
+
+    .line 0
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public final invoke(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    .locals 0
+
+    .line 0
+    check-cast p1, Landroidx/compose/foundation/style/StyleStateKey;
+
+    check-cast p2, Landroidx/compose/foundation/style/StyleState;
+
+    invoke-static {p1, p2}, Landroidx/compose/foundation/style/StyleStateKt;->$r8$lambda$ijIoblbQkwLXcxtFe0S3EBiqVPc(Landroidx/compose/foundation/style/StyleStateKey;Landroidx/compose/foundation/style/StyleState;)Z
+
+    move-result p1
+
+    invoke-static {p1}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+
+    move-result-object p1
+
+    return-object p1
+.end method

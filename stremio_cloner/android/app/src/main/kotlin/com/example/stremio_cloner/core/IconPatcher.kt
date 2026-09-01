@@ -18,6 +18,8 @@ class IconPatcher {
         "ic_stremio_logo"          to "logo",
         "ic_launcher"              to "logo",
         "ic_launcher_round"        to "logo",
+        "ic_launcher_foreground"   to "logo",
+        "ic_launcher_monochrome"   to "logo",
         "icon"                     to "logo",
         "logo"                     to "logo",
         "symbol"                   to "logo",
@@ -183,9 +185,15 @@ class IconPatcher {
                                     filesToRemove.add(currentPath)
                                     Log.d("IconPatcher", "Repointed XML [$category] $currentPath ($resName) -> $newPath (${w}x${h})")
                                 } else {
-                                    zipMap.add(ByteInputSource(finalBytes, currentPath))
-                                    processedPaths.add(currentPath)
-                                    Log.d("IconPatcher", "Overwrote [$category] $currentPath ($resName) -> ${w}x${h}")
+                                    var targetPath = currentPath
+                                    if (currentPath.endsWith(".webp")) {
+                                        targetPath = currentPath.substringBeforeLast(".webp") + ".png"
+                                        resValue.getDataAsPoolString()?.set(targetPath)
+                                        filesToRemove.add(currentPath)
+                                    }
+                                    zipMap.add(ByteInputSource(finalBytes, targetPath))
+                                    processedPaths.add(targetPath)
+                                    Log.d("IconPatcher", "Overwrote [$category] $currentPath ($resName) -> ${w}x${h} as $targetPath")
                                 }
                             } catch (e: Exception) {
                                 Log.e("IconPatcher", "Failed to patch entry $resName ($currentPath): ${e.message}")

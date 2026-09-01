@@ -737,16 +737,42 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
   }
 
 static const Map<String, String> fileIdMap = {
-  "ic_stremio_logo.png": "logo",
-  "ic_launcher.png": "logo",
-  "ic_launcher_round.png": "logo",
-  "icon.png": "logo",
-  "logo.png": "logo",
-  "ic_stremio_splash_logo.png": "splash",
-  "ic_banner_foreground.png": "banner",
-  "ic_banner.png": "banner",
-  "tv_banner.png": "banner",
-  "ic_stremio_logo_expanded.png": "expanded",
+  // Logo & Launcher
+  "ic_stremio_logo.png": "logo", "ic_stremio_logo.webp": "logo",
+  "ic_launcher.png": "logo", "ic_launcher.webp": "logo",
+  "ic_launcher_round.png": "logo", "ic_launcher_round.webp": "logo",
+  "ic_launcher_foreground.png": "logo", "ic_launcher_foreground.webp": "logo",
+  "ic_launcher_monochrome.png": "logo", "ic_launcher_monochrome.webp": "logo",
+  "icon.png": "logo", "icon.webp": "logo",
+  "logo.png": "logo", "logo.webp": "logo",
+  "symbol.png": "logo", "symbol.webp": "logo",
+  "ic_symbol.png": "logo", "ic_symbol.webp": "logo",
+  "symbol_logo.png": "logo", "symbol_logo.webp": "logo",
+  "ic_symbol_logo.png": "logo", "ic_symbol_logo.webp": "logo",
+
+  // Splash
+  "ic_stremio_splash_logo.png": "splash", "ic_stremio_splash_logo.webp": "splash",
+  "splash_logo.png": "splash", "splash_logo.webp": "splash",
+  "ic_splash_logo.png": "splash", "ic_splash_logo.webp": "splash",
+  "ic_stremio_splash.png": "splash", "ic_stremio_splash.webp": "splash",
+  "stremio_splash_logo.png": "splash", "stremio_splash_logo.webp": "splash",
+  "splash.png": "splash", "splash.webp": "splash",
+  "ic_splash.png": "splash", "ic_splash.webp": "splash",
+  "splash_icon.png": "splash", "splash_icon.webp": "splash",
+
+  // Banner
+  "ic_banner_foreground.png": "banner", "ic_banner_foreground.webp": "banner",
+  "ic_banner.png": "banner", "ic_banner.webp": "banner",
+  "tv_banner.png": "banner", "tv_banner.webp": "banner",
+  "banner.png": "banner", "banner.webp": "banner",
+  "banner_dark.png": "banner", "banner_dark.webp": "banner",
+  "banner_light.png": "banner", "banner_light.webp": "banner",
+
+  // Expanded
+  "ic_stremio_logo_expanded.png": "expanded", "ic_stremio_logo_expanded.webp": "expanded",
+  "logo_expanded.png": "expanded", "logo_expanded.webp": "expanded",
+  "stremio_logo_expanded.png": "expanded", "stremio_logo_expanded.webp": "expanded",
+  "ic_logo_expanded.png": "expanded", "ic_logo_expanded.webp": "expanded",
 };
 
 static const List<String> xmlKillList = [
@@ -755,10 +781,15 @@ static const List<String> xmlKillList = [
   "icon.xml",
   "banner.xml",
   "tv_banner.xml",
+  "symbol.xml",
+  "ic_symbol.xml",
   "ic_stremio_logo.xml",
-  "ic_stremio_logo_expanded.xml",
-  "ic_banner_foreground.xml",
   "ic_stremio_splash_logo.xml",
+  "splash_logo.xml",
+  "ic_splash_logo.xml",
+  "ic_banner_foreground.xml",
+  "ic_stremio_logo_expanded.xml",
+  "logo_expanded.xml",
 ];
 
 
@@ -949,7 +980,15 @@ static const List<String> xmlKillList = [
                       final compositedImage = await picture.toImage(targetWidth, targetHeight);
                       final byteData = await compositedImage.toByteData(format: ui.ImageByteFormat.png);
                       if (byteData != null) {
-                        await entity.writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+                        if (fileName.endsWith('.webp')) {
+                          // Write as PNG but change extension to .png so Apktool AAPT2 won't crash
+                          final newName = fileName.substring(0, fileName.length - 5) + '.png';
+                          final newPath = p.join(p.dirname(entity.path), newName);
+                          await File(newPath).writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+                          await entity.delete(); // Remove the old .webp
+                        } else {
+                          await entity.writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+                        }
                         patchedCount++;
                       }
                     }
