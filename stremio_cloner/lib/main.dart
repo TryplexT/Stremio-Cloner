@@ -176,10 +176,12 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
     platform.setMethodCallHandler((call) async {
       if (call.method == 'progress') {
         final int pct = call.arguments as int;
-        if (_currentIndex >= 0 && _currentIndex < _profiles.length) {
-          _log("[Clone ${_currentIndex + 1}/${_profiles.length}] Patching files... $pct%");
-        } else {
-          _log("[PROGRESS] Patching files... $pct%");
+        if (pct < 100) {
+          if (_currentIndex >= 0 && _currentIndex < _profiles.length) {
+            _log("[Clone ${_currentIndex + 1}/${_profiles.length}] Patching files... $pct%");
+          } else {
+            _log("[PROGRESS] Patching files... $pct%");
+          }
         }
         if (pct >= 100) {
           if (_nativeCloneCompleter != null && !_nativeCloneCompleter!.isCompleted) {
@@ -765,6 +767,24 @@ static const List<String> xmlKillList = [
       _log("[ERROR] Please select an original APK first.");
       return;
     }
+
+    final Set<String> appNames = {};
+    final Set<String> suffixes = {};
+    for (final profile in _profiles) {
+      final name = profile.appNameController.text.trim();
+      final suffix = profile.suffixController.text.trim();
+      if (appNames.contains(name)) {
+        _log("[ERROR] Duplicate App Name found: '$name'. All clones must have unique names.");
+        return;
+      }
+      if (suffixes.contains(suffix)) {
+        _log("[ERROR] Duplicate Package ID Suffix found: '$suffix'. All clones must have unique suffixes.");
+        return;
+      }
+      appNames.add(name);
+      suffixes.add(suffix);
+    }
+
     setState(() { _showLogs = true; _isProcessing = true; });
     for (int i = 0; i < _profiles.length; i++) {
       setState(() { _currentIndex = i; });
@@ -959,6 +979,7 @@ static const List<String> xmlKillList = [
         _log("[NATIVE] $result (Waiting for completion...)");
         await _nativeCloneCompleter!.future;
       }
+      _log("=== CLONE COMPLETED ===");
     } catch (e) {
       _log("[ERROR] Cloning failed: $e");
     }
@@ -1221,6 +1242,7 @@ static const List<String> xmlKillList = [
           if (_showLogs)
             Expanded(
               child: ListView.builder(
+              controller: _scrollController,
               padding: const EdgeInsets.all(12),
               itemCount: _logs.length,
               itemBuilder: (context, index) {
@@ -1622,7 +1644,10 @@ static const List<String> xmlKillList = [
                     minimumSize: const Size.fromHeight(50),
                     elevation: 4,
                   ),
-                  onPressed: _isProcessing || _isGenerating || _selectedApkPath == null ? null : _runClone,
+                  onPressed: _isProcessing || _isGenerating || _selectedApkPath == null ? null : () async {
+                    await _runClone();
+                    setState(() => _isProcessing = false);
+                  },
                 ),
                 const SizedBox(height: 12),
                 Center(
@@ -1786,16 +1811,17 @@ static const List<String> xmlKillList = [
                     final idx = entry.key;
                     final p = entry.value;
                     return ListTile(
-                      leading: Container(
+                      leading: SizedBox(
                         width: 24, height: 24,
-                        decoration: BoxDecoration(
-                          color: p.selectedColor,
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: p.useWhiteForeground ? Colors.white : Colors.black,
-                            width: 2,
-                          )
-                        )
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(6),
+                          child: CustomPaint(
+                            painter: ImageComposerPainter(
+                              image: _loadedImages[_assetSets['logo']![p.useWhiteForeground ? 'white' : 'black']!]!,
+                              backgroundColor: p.selectedColor,
+                            ),
+                          ),
+                        ),
                       ),
                       title: Text(p.appNameController.text.isEmpty ? "Stremio Cloned" : p.appNameController.text),
                       subtitle: Text("com.stremio.one.${p.suffixController.text}"),
