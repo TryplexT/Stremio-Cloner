@@ -59,7 +59,7 @@ class IconPatcher {
     )
 
     // Loads bitmap with guaranteed ARGB_8888 + composites onto solid color
-    private fun compositeOnColor(master: Bitmap, color: Int, w: Int, h: Int, isRound: Boolean = false): ByteArray {
+    private fun compositeOnColor(master: Bitmap, color: Int, w: Int, h: Int, isRound: Boolean = false, isLauncher: Boolean = false): ByteArray {
         val safeSource = if (master.config != Bitmap.Config.ARGB_8888) {
             master.copy(Bitmap.Config.ARGB_8888, true)
         } else master
@@ -81,7 +81,11 @@ class IconPatcher {
         val srcHeight = safeSource.height.toFloat()
         val scaleX = w / srcWidth
         val scaleY = h / srcHeight
-        val scale = if (scaleX < scaleY) scaleX else scaleY
+        var scale = if (scaleX < scaleY) scaleX else scaleY
+        
+        if (isLauncher) {
+            scale *= 0.65f // Add padding to prevent launcher from cropping the logo
+        }
 
         val dstWidth = srcWidth * scale
         val dstHeight = srcHeight * scale
@@ -170,15 +174,17 @@ class IconPatcher {
                                 }
 
                                 val isRound = currentPath.contains("round")
-                                val finalBytes = compositeOnColor(master, appColor, w, h, isRound)
+                                val isLauncher = category == "logo"
+                                val finalBytes = compositeOnColor(master, appColor, w, h, isRound, isLauncher)
 
                                 if (isXml) {
                                     if (resName == "ic_launcher" || resName == "ic_launcher_round") {
                                         Log.d("IconPatcher", "Preserving adaptive XML for $resName ($currentPath)")
                                         continue
                                     }
-
-                                    val newPath = "res/clone_${resName}_${typeBlock.resConfig}.png"
+                                    
+                                    val dir = if (currentPath.contains("/")) currentPath.substringBeforeLast("/") else "res"
+                                    val newPath = "$dir/clone_${resName}_${typeBlock.resConfig}.png"
                                     zipMap.add(ByteInputSource(finalBytes, newPath))
                                     resValue.getDataAsPoolString()?.set(newPath)
                                     processedPaths.add(newPath)

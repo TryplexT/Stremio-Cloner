@@ -963,6 +963,11 @@ static const List<String> xmlKillList = [
                       double scaleX = targetWidth / srcWidth;
                       double scaleY = targetHeight / srcHeight;
                       double scale = scaleX < scaleY ? scaleX : scaleY;
+                      
+                      // Add padding for launcher icons
+                      if (category == 'logo') {
+                        scale *= 0.65;
+                      }
 
                       double dstWidth = srcWidth * scale;
                       double dstHeight = srcHeight * scale;
@@ -1997,7 +2002,7 @@ class ImageComposerPainter extends CustomPainter {
 
       double scaleX = size.width / srcWidth;
       double scaleY = size.height / srcHeight;
-      double scale = scaleX < scaleY ? scaleX : scaleY;
+      double scale = (scaleX < scaleY ? scaleX : scaleY) * 0.65; // Add padding preview
 
       double dstWidth = srcWidth * scale;
       double dstHeight = srcHeight * scale;
