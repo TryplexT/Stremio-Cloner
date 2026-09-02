@@ -963,12 +963,6 @@ static const List<String> xmlKillList = [
                       double scaleX = targetWidth / srcWidth;
                       double scaleY = targetHeight / srcHeight;
                       double scale = scaleX < scaleY ? scaleX : scaleY;
-                      
-                      // Add padding for launcher icons
-                      if (category == 'logo') {
-                        bool isForeground = fileName.contains('foreground');
-                        scale *= (isForeground ? 0.65 : 1.0);
-                      }
 
                       double dstWidth = srcWidth * scale;
                       double dstHeight = srcHeight * scale;
@@ -986,15 +980,7 @@ static const List<String> xmlKillList = [
                       final compositedImage = await picture.toImage(targetWidth, targetHeight);
                       final byteData = await compositedImage.toByteData(format: ui.ImageByteFormat.png);
                       if (byteData != null) {
-                        if (fileName.endsWith('.webp')) {
-                          // Write as PNG but change extension to .png so Apktool AAPT2 won't crash
-                          final newName = fileName.substring(0, fileName.length - 5) + '.png';
-                          final newPath = p.join(p.dirname(entity.path), newName);
-                          await File(newPath).writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
-                          await entity.delete(); // Remove the old .webp
-                        } else {
-                          await entity.writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
-                        }
+                        await entity.writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
                         patchedCount++;
                       }
                     }

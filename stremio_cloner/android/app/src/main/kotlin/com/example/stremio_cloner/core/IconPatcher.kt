@@ -59,7 +59,7 @@ class IconPatcher {
     )
 
     // Loads bitmap with guaranteed ARGB_8888 + composites onto solid color
-    private fun compositeOnColor(master: Bitmap, color: Int, w: Int, h: Int, isRound: Boolean = false, paddingScale: Float = 1.0f): ByteArray {
+    private fun compositeOnColor(master: Bitmap, color: Int, w: Int, h: Int, isRound: Boolean = false, paddingScale: Float = 1.0f, asWebp: Boolean = false): ByteArray {
         val safeSource = if (master.config != Bitmap.Config.ARGB_8888) {
             master.copy(Bitmap.Config.ARGB_8888, true)
         } else master
@@ -96,7 +96,16 @@ class IconPatcher {
         canvas.drawBitmap(safeSource, srcRect, dstRect, Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG))
 
         val stream = ByteArrayOutputStream()
-        out.compress(Bitmap.CompressFormat.PNG, 100, stream)
+        if (asWebp) {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+                out.compress(Bitmap.CompressFormat.WEBP_LOSSLESS, 100, stream)
+            } else {
+                @Suppress("DEPRECATION")
+                out.compress(Bitmap.CompressFormat.WEBP, 100, stream)
+            }
+        } else {
+            out.compress(Bitmap.CompressFormat.PNG, 100, stream)
+        }
         Log.d("IconPatcher", "compositeOnColor ${w}x${h} color=0x${Integer.toHexString(color)}")
         return stream.toByteArray()
     }
@@ -166,19 +175,38 @@ class IconPatcher {
                                         val existingBytes = sourceEntry.openStream().readBytes()
                                         val opts = BitmapFactory.Options().apply { inJustDecodeBounds = true }
                                         BitmapFactory.decodeByteArray(existingBytes, 0, existingBytes.size, opts)
-                                        if (opts.outWidth > 0) w = opts.outWidth
-                                        if (opts.outHeight > 0) h = opts.outHeight
+                                        if (opts.outWidth > 0 && opts.outHeight > 0) {
+                                            w = opts.outWidth
+                                            h = opts.outHeight
+                                        } else {
+                                            val fullBmp = BitmapFactory.decodeByteArray(existingBytes, 0, existingBytes.size)
+                                            if (fullBmp != null) {
+                                                w = fullBmp.width
+                                                h = fullBmp.height
+                                                fullBmp.recycle()
+                                            } else {
+                                                // If even full decode fails, try to infer from folder path
+                                                if (currentPath.contains("xxxhdpi")) { w = 192; h = 192 }
+                                                else if (currentPath.contains("xxhdpi")) { w = 144; h = 144 }
+                                                else if (currentPath.contains("xhdpi")) { w = 96; h = 96 }
+                                                else if (currentPath.contains("hdpi")) { w = 72; h = 72 }
+                                                else { w = 48; h = 48 }
+                                            }
+                                        }
                                     }
                                 }
 
                                 val isRound = currentPath.contains("round")
+                                val isWebp = currentPath.endsWith(".webp") || isXml
+                                
                                 val isForeground = resName.contains("foreground")
                                 val paddingScale = if (category == "logo") {
-                                    if (isForeground) 0.65f else 1.0f
+                                    if (isForeground) 0.66f else 0.85f
                                 } else {
                                     1.0f
                                 }
-                                val finalBytes = compositeOnColor(master, appColor, w, h, isRound, paddingScale)
+                                
+                                val finalBytes = compositeOnColor(master, appColor, w, h, isRound, paddingScale, isWebp)
 
                                 if (isXml) {
                                     if (resName == "ic_launcher" || resName == "ic_launcher_round") {
@@ -186,20 +214,22 @@ class IconPatcher {
                                         continue
                                     }
                                     
-                                    val dir = if (currentPath.contains("/")) currentPath.substringBeforeLast("/") else "res"
-                                    val newPath = "$dir/clone_${resName}_${typeBlock.resConfig}.png"
-                                    zipMap.add(ByteInputSource(finalBytes, newPath))
+                                    // For XML adaptive foregrounds, they are typically 108x108 dp.
+                                    // We create a 432x432 (xxxhdpi) raster image and place it in a xxxhdpi folder
+                                    // so Android correctly scales it as 108dp and keeps it sharp.
+                                    w = 432
+                                    h = 432
+                                    val finalBytesXml = compositeOnColor(master, appColor, w, h, isRound, 0.66f, isWebp)
+
+                                    val dir = "res/mipmap-xxxhdpi-v26"
+                                    val newPath = "$dir/clone_${resName}_${typeBlock.resConfig}.webp"
+                                    zipMap.add(ByteInputSource(finalBytesXml, newPath))
                                     resValue.getDataAsPoolString()?.set(newPath)
                                     processedPaths.add(newPath)
                                     filesToRemove.add(currentPath)
                                     Log.d("IconPatcher", "Repointed XML [$category] $currentPath ($resName) -> $newPath (${w}x${h})")
                                 } else {
-                                    var targetPath = currentPath
-                                    if (currentPath.endsWith(".webp")) {
-                                        targetPath = currentPath.substringBeforeLast(".webp") + ".png"
-                                        resValue.getDataAsPoolString()?.set(targetPath)
-                                        filesToRemove.add(currentPath)
-                                    }
+                                    val targetPath = currentPath
                                     zipMap.add(ByteInputSource(finalBytes, targetPath))
                                     processedPaths.add(targetPath)
                                     Log.d("IconPatcher", "Overwrote [$category] $currentPath ($resName) -> ${w}x${h} as $targetPath")
