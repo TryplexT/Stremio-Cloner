@@ -59,7 +59,7 @@ class IconPatcher {
     )
 
     // Loads bitmap with guaranteed ARGB_8888 + composites onto solid color
-    private fun compositeOnColor(master: Bitmap, color: Int, w: Int, h: Int, isRound: Boolean = false, isLauncher: Boolean = false): ByteArray {
+    private fun compositeOnColor(master: Bitmap, color: Int, w: Int, h: Int, isRound: Boolean = false, paddingScale: Float = 1.0f): ByteArray {
         val safeSource = if (master.config != Bitmap.Config.ARGB_8888) {
             master.copy(Bitmap.Config.ARGB_8888, true)
         } else master
@@ -83,9 +83,7 @@ class IconPatcher {
         val scaleY = h / srcHeight
         var scale = if (scaleX < scaleY) scaleX else scaleY
         
-        if (isLauncher) {
-            scale *= 0.65f // Add padding to prevent launcher from cropping the logo
-        }
+        scale *= paddingScale
 
         val dstWidth = srcWidth * scale
         val dstHeight = srcHeight * scale
@@ -174,8 +172,13 @@ class IconPatcher {
                                 }
 
                                 val isRound = currentPath.contains("round")
-                                val isLauncher = category == "logo"
-                                val finalBytes = compositeOnColor(master, appColor, w, h, isRound, isLauncher)
+                                val isForeground = resName.contains("foreground")
+                                val paddingScale = if (category == "logo") {
+                                    if (isForeground) 0.65f else 1.0f
+                                } else {
+                                    1.0f
+                                }
+                                val finalBytes = compositeOnColor(master, appColor, w, h, isRound, paddingScale)
 
                                 if (isXml) {
                                     if (resName == "ic_launcher" || resName == "ic_launcher_round") {

@@ -966,7 +966,8 @@ static const List<String> xmlKillList = [
                       
                       // Add padding for launcher icons
                       if (category == 'logo') {
-                        scale *= 0.65;
+                        bool isForeground = fileName.contains('foreground');
+                        scale *= (isForeground ? 0.65 : 1.0);
                       }
 
                       double dstWidth = srcWidth * scale;
