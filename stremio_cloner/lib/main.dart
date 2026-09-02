@@ -2002,7 +2002,7 @@ class ImageComposerPainter extends CustomPainter {
 
       double scaleX = size.width / srcWidth;
       double scaleY = size.height / srcHeight;
-      double scale = (scaleX < scaleY ? scaleX : scaleY) * 0.65; // Add padding preview
+      double scale = scaleX < scaleY ? scaleX : scaleY;
 
       double dstWidth = srcWidth * scale;
       double dstHeight = srcHeight * scale;
