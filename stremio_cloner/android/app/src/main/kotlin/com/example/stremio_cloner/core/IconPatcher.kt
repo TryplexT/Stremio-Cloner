@@ -201,7 +201,7 @@ class IconPatcher {
                                 
                                 val isForeground = resName.contains("foreground")
                                 val paddingScale = if (category == "logo") {
-                                    if (isForeground) 0.66f else 0.85f
+                                    if (isForeground) 0.66f else 1.0f
                                 } else {
                                     1.0f
                                 }
@@ -214,15 +214,30 @@ class IconPatcher {
                                         continue
                                     }
                                     
-                                    // For XML adaptive foregrounds, they are typically 108x108 dp.
-                                    // We create a 432x432 (xxxhdpi) raster image and place it in a xxxhdpi folder
-                                    // so Android correctly scales it as 108dp and keeps it sharp.
-                                    w = 432
-                                    h = 432
-                                    val finalBytesXml = compositeOnColor(master, appColor, w, h, isRound, 0.66f, isWebp)
+                                    val finalBytesXml: ByteArray
+                                    val outDir: String
+                                    
+                                    if (isForeground) {
+                                        // For XML adaptive foregrounds, they are typically 108x108 dp.
+                                        // We create a 432x432 (xxxhdpi) raster image and place it in a xxxhdpi folder
+                                        // so Android correctly scales it as 108dp and keeps it sharp.
+                                        w = 432
+                                        h = 432
+                                        finalBytesXml = compositeOnColor(master, appColor, w, h, isRound, 0.66f, isWebp)
+                                        outDir = "res/mipmap-xxxhdpi-v26"
+                                    } else {
+                                        // For regular vectors (banner, expanded, simple logo) keep master dimensions
+                                        // and normal paddingScale to avoid massive letterbox borders.
+                                        w = master.width
+                                        h = master.height
+                                        finalBytesXml = compositeOnColor(master, appColor, w, h, isRound, paddingScale, isWebp)
+                                        
+                                        // Determine if it should go in drawable or mipmap
+                                        val baseDir = if (currentPath.startsWith("res/mipmap")) "mipmap" else "drawable"
+                                        outDir = "res/$baseDir-xxxhdpi"
+                                    }
 
-                                    val dir = "res/mipmap-xxxhdpi-v26"
-                                    val newPath = "$dir/clone_${resName}_${typeBlock.resConfig}.webp"
+                                    val newPath = "$outDir/clone_${resName}_${typeBlock.resConfig}.webp"
                                     zipMap.add(ByteInputSource(finalBytesXml, newPath))
                                     resValue.getDataAsPoolString()?.set(newPath)
                                     processedPaths.add(newPath)
