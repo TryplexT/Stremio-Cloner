@@ -804,11 +804,20 @@ static const List<String> xmlKillList = [
     for (final profile in _profiles) {
       final name = profile.appNameController.text.trim();
       final suffix = profile.suffixController.text.trim();
+      
+      if (suffix.isEmpty || !RegExp(r'^[a-zA-Z]').hasMatch(suffix)) {
+        setState(() => _showLogs = true);
+        _log("[ERROR] Invalid Package ID Suffix: '$suffix'. It must start with a letter (a-z or A-Z).");
+        return;
+      }
+
       if (appNames.contains(name)) {
+        setState(() => _showLogs = true);
         _log("[ERROR] Duplicate App Name found: '$name'. All clones must have unique names.");
         return;
       }
       if (suffixes.contains(suffix)) {
+        setState(() => _showLogs = true);
         _log("[ERROR] Duplicate Package ID Suffix found: '$suffix'. All clones must have unique suffixes.");
         return;
       }
@@ -875,6 +884,13 @@ static const List<String> xmlKillList = [
     try {
       final appName = _appNameController.text;
       final suffix = _suffixController.text.trim();
+      
+      if (suffix.isEmpty || !RegExp(r'^[a-zA-Z]').hasMatch(suffix)) {
+        setState(() => _isProcessing = false);
+        _log("[ERROR] Invalid Package ID Suffix: '$suffix'. It must start with a letter (a-z or A-Z).");
+        return;
+      }
+
       final newPackage = "com.stremio.$suffix";
       _log("Queuing Clone: $appName ($newPackage)");
 
