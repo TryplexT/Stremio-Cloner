@@ -21,7 +21,7 @@ class IconPatcher {
         "ic_launcher_foreground"   to "logo",
         "ic_launcher_monochrome"   to "logo",
         "icon"                     to "logo",
-        "logo"                     to "logo",
+        "logo"                     to "in_app_logo",
         "symbol"                   to "logo",
         "ic_symbol"                to "logo",
         "symbol_logo"              to "logo",
@@ -41,9 +41,9 @@ class IconPatcher {
         "ic_banner_foreground"     to "banner",
         "ic_banner"                to "banner",
         "tv_banner"                to "banner",
-        "banner"                   to "banner",
-        "banner_dark"              to "banner",
-        "banner_light"             to "banner",
+        "banner"                   to "in_app_banner",
+        "banner_dark"              to "in_app_banner",
+        "banner_light"             to "in_app_banner",
 
         // Expanded logo variants
         "ic_stremio_logo_expanded" to "expanded",
@@ -158,7 +158,8 @@ class IconPatcher {
                         val master = masters[category] ?: continue
 
                         val resValue = entry.getResValue() ?: continue
-                        val currentPath = resValue.getDataAsPoolString()?.toString() ?: continue
+                        val poolStr = resValue.getDataAsPoolString()
+                        val currentPath = poolStr?.get() ?: continue
                         if (currentPath in processedPaths) continue
 
                         val isXml = currentPath.endsWith(".xml")
@@ -200,7 +201,7 @@ class IconPatcher {
                                 val isWebp = currentPath.endsWith(".webp") || isXml
                                 
                                 val isForeground = resName.contains("foreground")
-                                val paddingScale = if (category == "logo") {
+                                val paddingScale = if (category == "logo" || category == "in_app_logo") {
                                     if (isForeground) 0.66f else 1.0f
                                 } else {
                                     1.0f
@@ -245,6 +246,10 @@ class IconPatcher {
                                     Log.d("IconPatcher", "Repointed XML [$category] $currentPath ($resName) -> $newPath (${w}x${h})")
                                 } else {
                                     val targetPath = currentPath
+                                    val oldEntry = zipMap.toArray().find { it.name == targetPath }
+                                    if (oldEntry != null) {
+                                        zipMap.remove(oldEntry)
+                                    }
                                     zipMap.add(ByteInputSource(finalBytes, targetPath))
                                     processedPaths.add(targetPath)
                                     Log.d("IconPatcher", "Overwrote [$category] $currentPath ($resName) -> ${w}x${h} as $targetPath")

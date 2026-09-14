@@ -73,6 +73,14 @@ const Map<String, Map<String, String>> _assetSets = {
     'white': 'assets/my_expanded_white.png',
     'black': 'assets/my_expanded_black.png',
   },
+  'in_app_logo': {
+    'white': 'assets/logo_white_801.png',
+    'black': 'assets/logo_black_801.png',
+  },
+  'in_app_banner': {
+    'white': 'assets/my_banner_white_1727.png',
+    'black': 'assets/my_banner_black_1727.png',
+  },
 };
 
 class ExtractedAssetInfo {
@@ -798,7 +806,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
     "ic_launcher_foreground.png": "logo", "ic_launcher_foreground.webp": "logo",
     "ic_launcher_monochrome.png": "logo", "ic_launcher_monochrome.webp": "logo",
     "icon.png": "logo", "icon.webp": "logo",
-    "logo.png": "logo", "logo.webp": "logo",
+    "logo.png": "in_app_logo", "logo.webp": "in_app_logo",
     "symbol.png": "logo", "symbol.webp": "logo",
     "ic_symbol.png": "logo", "ic_symbol.webp": "logo",
     "symbol_logo.png": "logo", "symbol_logo.webp": "logo",
@@ -819,9 +827,9 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
     "ic_banner_foreground.png": "banner", "ic_banner_foreground.webp": "banner",
     "ic_banner.png": "banner", "ic_banner.webp": "banner",
     "tv_banner.png": "banner", "tv_banner.webp": "banner",
-    "banner.png": "banner", "banner.webp": "banner",
-    "banner_dark.png": "banner", "banner_dark.webp": "banner",
-    "banner_light.png": "banner", "banner_light.webp": "banner",
+    "banner.png": "in_app_banner", "banner.webp": "in_app_banner",
+    "banner_dark.png": "in_app_banner", "banner_dark.webp": "in_app_banner",
+    "banner_light.png": "in_app_banner", "banner_light.webp": "in_app_banner",
 
     // Expanded
     "ic_stremio_logo_expanded.png": "expanded",
