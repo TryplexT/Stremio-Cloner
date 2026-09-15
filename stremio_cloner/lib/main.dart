@@ -12,6 +12,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as p;
+import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 const String sourceFolder = "stremio_source";
 const String apktoolJar = "apktool.jar";
@@ -2102,23 +2104,42 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
       drawer: Drawer(
         child: Column(
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(color: Color(0xFF1E1A32)),
+            DrawerHeader(
+              decoration: const BoxDecoration(color: Color(0xFF1E1A32)),
               child: SizedBox(
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Icon(Icons.color_lens, color: Color(0xFF8B5CF6), size: 48),
-                    SizedBox(height: 16),
-                    Text(
+                    const Icon(Icons.color_lens, color: Color(0xFF8B5CF6), size: 48),
+                    const Spacer(),
+                    const Text(
                       'Stremio Cloner',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () => launchUrl(Uri.parse('https://www.youtube.com/@TryplexT'), mode: LaunchMode.externalApplication),
+                          child: FaIcon(FontAwesomeIcons.youtube, color: Colors.white70, size: 20),
+                        ),
+                        const SizedBox(width: 16),
+                        InkWell(
+                          onTap: () => launchUrl(Uri.parse('https://www.instagram.com/tryplext/'), mode: LaunchMode.externalApplication),
+                          child: FaIcon(FontAwesomeIcons.instagram, color: Colors.white70, size: 20),
+                        ),
+                        const SizedBox(width: 16),
+                        InkWell(
+                          onTap: () => launchUrl(Uri.parse('https://github.com/TryplexT'), mode: LaunchMode.externalApplication),
+                          child: FaIcon(FontAwesomeIcons.github, color: Colors.white70, size: 20),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -2222,7 +2243,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                 color: Colors.pinkAccent,
               ),
               title: const Text('Donate'),
-              onTap: () {},
+              onTap: () => launchUrl(Uri.parse('https://ko-fi.com/tryplext'), mode: LaunchMode.externalApplication),
             ),
             const SizedBox(height: 16),
           ],
