@@ -139,7 +139,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
   Map<String, String> _generatedPaths = {};
 
   int _currentIndex = 0;
-  List<CloneProfile> _profiles = [
+  final List<CloneProfile> _profiles = [
     CloneProfile(id: UniqueKey().toString(), isExpanded: true),
   ];
 
@@ -179,9 +179,6 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
   String? _selectedApkPath;
   String? _decompiledDirPath;
   bool _isTempDecompiled = false;
-  DecompiledAuditResult? _auditResult;
-  String _selectedDrawableFilter = 'All';
-  String _searchQuery = '';
 
   static const platform = MethodChannel('com.stremio.studio/build');
 
@@ -327,10 +324,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
     return frame.image;
   }
 
-  bool _useWhiteForeground(Color bg) {
-    // Luminance below threshold = dark background -> use white logo variant
-    return bg.computeLuminance() < 0.45;
-  }
+
 
   /// Composites asset categories (except logo which is left transparent)
   /// over [_selectedColor] and writes the results as PNG files into the
@@ -357,7 +351,8 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
         final data = await rootBundle.load(assetPath);
         final bytes = data.buffer.asUint8List();
 
-        final hex = _selectedColor.value
+        final hex = _selectedColor
+            .toARGB32()
             .toRadixString(16)
             .padLeft(8, '0')
             .substring(2);
@@ -475,7 +470,6 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
         targetDrawables: [],
         drawableFolders: [],
       );
-      setState(() => _auditResult = emptyResult);
       return emptyResult;
     }
 
@@ -597,9 +591,6 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
       drawableFolders: folderList,
     );
 
-    setState(() {
-      _auditResult = result;
-    });
 
     return result;
   }
@@ -684,121 +675,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
     }
   }
 
-  Future<void> _decompileToCustomFolder() async {
-    if (_selectedApkPath == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Please select a Stremio APK first!")),
-      );
-      return;
-    }
 
-    if (Platform.isAndroid) {
-      PermissionStatus status =
-          await Permission.manageExternalStorage.request();
-      if (status.isDenied || status.isPermanentlyDenied) {
-        status = await Permission.storage.request();
-      }
-      if (!status.isGranted) {
-        _log(
-          "[ERROR] Permission Denied! Storage access is required to decompile.",
-        );
-        return;
-      }
-    }
-
-    String? selectedDirectory = await FilePicker.platform.getDirectoryPath(
-      dialogTitle: 'Select Folder to Save Decompiled Files',
-      initialDirectory: _outputPathController.text,
-    );
-    if (selectedDirectory == null) return;
-
-    setState(() {
-      _isProcessing = true;
-    });
-
-    final apkBaseName = p.basenameWithoutExtension(_selectedApkPath!);
-    final targetPath = p.join(selectedDirectory, apkBaseName);
-    _log("Decompiling APK to: $targetPath");
-
-    try {
-      final targetDir = Directory(targetPath);
-      if (await targetDir.exists()) {
-        try {
-          await targetDir.delete(recursive: true);
-        } catch (e) {
-          _log("[WARNING] Could not delete old directory: $e");
-        }
-      }
-      await targetDir.create(recursive: true);
-
-      if (Platform.isWindows) {
-        _log("Stage 1: Extracting raw APK ZIP contents (Windows)...");
-        try {
-          final tarResult = await Process.run('tar', [
-            '-xf',
-            _selectedApkPath!,
-            '-C',
-            targetPath,
-          ]);
-          if (tarResult.exitCode == 0) {
-            _log("[SUCCESS] Stage 1: Raw APK ZIP contents extracted.");
-          } else {
-            _log("[NOTE] Tar extraction info: ${tarResult.stderr}");
-          }
-        } catch (e) {
-          _log("[NOTE] Tar extraction skipped: $e");
-        }
-
-        _log("Stage 2: Decompiling binary XMLs & smali via Apktool...");
-        final apktoolFile = File(apktoolJar);
-        if (!await apktoolFile.exists()) {
-          _log(
-            "[WARNING] apktool.jar not found at ${apktoolFile.absolute.path}, raw files preserved.",
-          );
-        } else {
-          final processResult = await Process.run('java', [
-            '-jar',
-            apktoolJar,
-            'd',
-            _selectedApkPath!,
-            '-o',
-            targetPath,
-            '-f',
-          ]);
-
-          if (processResult.exitCode != 0) {
-            _log(
-              "[WARNING] Apktool finished with exit code ${processResult.exitCode}: ${processResult.stderr}",
-            );
-          } else {
-            _log(
-              "[SUCCESS] Stage 2: Apktool decompiled successfully to $targetPath",
-            );
-          }
-        }
-      } else {
-        _log("Triggering native Android decompile...");
-        final String res = await platform.invokeMethod('decompile', {
-          'inputPath': _selectedApkPath,
-          'outputPath': targetPath,
-        });
-        _log("[SUCCESS] $res");
-      }
-
-      setState(() {
-        _decompiledDirPath = targetPath;
-        _isTempDecompiled = false;
-      });
-      _log(
-        "Working directory updated to $targetPath. Auditing extracted contents...",
-      );
-      await _auditDecompiledFolder(targetPath);
-    } on PlatformException catch (e) {
-      _log("[ERROR] Decompile failed: ${e.message}");
-    } catch (e) {
-      _log("[ERROR] Decompile failed: $e");
-    }
-  }
 
   static const Map<String, String> fileIdMap = {
     // Logo & Launcher
@@ -960,6 +837,8 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
       }
     }
 
+    if (!mounted) return;
+
     if (Platform.isWindows && !_toolsReady) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Missing Tools! Check Logs.")),
@@ -1071,7 +950,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                         targetHeight = frame.image.height;
                       } catch (e) {
                         _log(
-                          "[WARNING] Could not read dimensions of ${fileName}. Using default size.",
+                          "[WARNING] Could not read dimensions of $fileName. Using default size.",
                         );
                       }
 
@@ -1161,7 +1040,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
           'oldPackage': 'com.stremio.one',
           'newPackage': newPackage,
           'appName': appName,
-          'appColor': _selectedColor.value,
+          'appColor': _selectedColor.toARGB32(),
           'iconPaths': _generatedPaths,
         });
         _log("[NATIVE] $result (Waiting for completion...)");
@@ -1215,7 +1094,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                           border: Border.all(color: Colors.white10),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.5),
+                              color: Colors.black.withValues(alpha: 0.5),
                               blurRadius: 20,
                               offset: const Offset(0, 10),
                             ),
@@ -1273,30 +1152,6 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
     );
   }
 
-  Widget _buildFilterChip(String label) {
-    final isSelected = _selectedDrawableFilter == label;
-    return Padding(
-      padding: const EdgeInsets.only(right: 6.0),
-      child: FilterChip(
-        selected: isSelected,
-        label: Text(
-          label,
-          style: TextStyle(
-            fontSize: 11,
-            color: isSelected ? Colors.white : Colors.white70,
-          ),
-        ),
-        selectedColor: const Color(0xFF8B5CF6),
-        backgroundColor: const Color(0xFF130F24),
-        onSelected: (val) {
-          setState(() {
-            _selectedDrawableFilter = label;
-          });
-        },
-      ),
-    );
-  }
-
   @override
   void dispose() {
     _appNameController.dispose();
@@ -1306,7 +1161,6 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
     super.dispose();
   }
 
-  @override
   Widget _buildGlobalApkSelector() {
     return Card(
       margin: const EdgeInsets.only(bottom: 24),
@@ -1315,8 +1169,8 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
         side: BorderSide(
           color:
               _selectedApkPath == null
-                  ? Colors.redAccent.withOpacity(0.5)
-                  : Colors.greenAccent.withOpacity(0.5),
+                  ? Colors.redAccent.withValues(alpha: 0.5)
+                  : Colors.greenAccent.withValues(alpha: 0.5),
           width: 2,
         ),
       ),
@@ -1346,10 +1200,10 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                 minimumSize: const Size.fromHeight(56),
                 backgroundColor: Theme.of(
                   context,
-                ).colorScheme.primary.withOpacity(0.2),
+                ).colorScheme.primary.withValues(alpha: 0.2),
                 foregroundColor: Colors.white,
                 side: BorderSide(
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+                  color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
                 ),
               ),
               onPressed: _isProcessing ? null : _pickAndDecompile,
@@ -1539,7 +1393,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(
                   context,
-                ).colorScheme.primary.withOpacity(0.2),
+                ).colorScheme.primary.withValues(alpha: 0.2),
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
               onPressed: () {
@@ -1633,10 +1487,11 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                             onPressed: () {
                               setState(() {
                                 _profiles.removeAt(index);
-                                if (_currentIndex == index)
+                                if (_currentIndex == index) {
                                   _currentIndex = -1;
-                                else if (_currentIndex > index)
+                                } else if (_currentIndex > index) {
                                   _currentIndex--;
+                                }
                               });
                             },
                           ),
@@ -1665,6 +1520,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
     );
   }
 
+  @override
   Widget build(BuildContext context) {
     if (_isLoading) {
       return const Scaffold(
@@ -1744,7 +1600,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                         border: Border.all(color: Colors.white24, width: 2),
                         boxShadow: [
                           BoxShadow(
-                            color: _selectedColor.withOpacity(0.3),
+                            color: _selectedColor.withValues(alpha: 0.3),
                             blurRadius: 12,
                             spreadRadius: 2,
                           ),
@@ -1757,7 +1613,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '#${_selectedColor.value.toRadixString(16).substring(2).toUpperCase()}',
+                            '#${_selectedColor.toARGB32().toRadixString(16).substring(2).toUpperCase()}',
                             style: const TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.w900,
@@ -1765,7 +1621,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                             ),
                           ),
                           Text(
-                            'RGB(${_selectedColor.red}, ${_selectedColor.green}, ${_selectedColor.blue})',
+                            'RGB(${(_selectedColor.r * 255).round()}, ${(_selectedColor.g * 255).round()}, ${(_selectedColor.b * 255).round()})',
                             style: const TextStyle(
                               fontSize: 14,
                               color: Colors.white70,
@@ -1815,7 +1671,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                                     isSelected
                                         ? [
                                           BoxShadow(
-                                            color: color.withOpacity(0.5),
+                                            color: color.withValues(alpha: 0.5),
                                             blurRadius: 8,
                                             spreadRadius: 2,
                                           ),
@@ -2050,7 +1906,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.6),
+                              color: Colors.black.withValues(alpha: 0.6),
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(
