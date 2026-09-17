@@ -620,6 +620,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
       _showLogs = true;
       _isProcessing = true;
     });
+    WakelockPlus.enable();
 
     _log("Selected APK: ${p.basename(_selectedApkPath!)}");
 
@@ -669,6 +670,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
       _log("[ERROR] Decompile failed: $e");
       _decompiledDirPath = null;
     } finally {
+      WakelockPlus.disable();
       setState(() => _isProcessing = false);
     }
   }
