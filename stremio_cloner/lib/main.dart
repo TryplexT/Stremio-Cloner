@@ -14,6 +14,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as p;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 const String sourceFolder = "stremio_source";
 const String apktoolJar = "apktool.jar";
@@ -781,6 +782,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
       _showLogs = true;
       _isProcessing = true;
     });
+    WakelockPlus.enable();
     for (int i = 0; i < _profiles.length; i++) {
       setState(() {
         _currentIndex = i;
@@ -794,6 +796,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
       _isProcessing = false;
       _currentIndex = -1;
     });
+    WakelockPlus.disable();
     _log("=== ALL CLONES COMPLETED ===");
   }
 
@@ -1841,8 +1844,10 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                       _isProcessing || _isGenerating || _selectedApkPath == null
                           ? null
                           : () async {
+                            WakelockPlus.enable();
                             await _runClone();
                             setState(() => _isProcessing = false);
+                            WakelockPlus.disable();
                           },
                 ),
                 const SizedBox(height: 12),
