@@ -41,6 +41,7 @@ class IconPatcher {
         "ic_banner_foreground"     to "banner",
         "ic_banner"                to "banner",
         "tv_banner"                to "banner",
+        "stremio_banner"           to "banner",
         "banner"                   to "in_app_banner",
         "banner_dark"              to "in_app_banner",
         "banner_light"             to "in_app_banner",
@@ -210,7 +211,7 @@ class IconPatcher {
                                 val finalBytes = compositeOnColor(master, appColor, w, h, isRound, paddingScale, isWebp)
 
                                 if (isXml) {
-                                    if (resName == "ic_launcher" || resName == "ic_launcher_round") {
+                                    if (resName == "ic_launcher" || resName == "ic_launcher_round" || resName == "ic_banner") {
                                         Log.d("IconPatcher", "Preserving adaptive XML for $resName ($currentPath)")
                                         continue
                                     }
@@ -218,7 +219,7 @@ class IconPatcher {
                                     val finalBytesXml: ByteArray
                                     val outDir: String
                                     
-                                    if (isForeground) {
+                                    if (isForeground && category != "banner") {
                                         // For XML adaptive foregrounds, they are typically 108x108 dp.
                                         // We create a 432x432 (xxxhdpi) raster image and place it in a xxxhdpi folder
                                         // so Android correctly scales it as 108dp and keeps it sharp.

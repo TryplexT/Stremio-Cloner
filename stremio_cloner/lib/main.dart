@@ -324,8 +324,6 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
     return frame.image;
   }
 
-
-
   /// Composites asset categories (except logo which is left transparent)
   /// over [_selectedColor] and writes the results as PNG files into the
   /// app cache directory.
@@ -591,7 +589,6 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
       drawableFolders: folderList,
     );
 
-
     return result;
   }
 
@@ -675,8 +672,6 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
     }
   }
 
-
-
   static const Map<String, String> fileIdMap = {
     // Logo & Launcher
     "ic_stremio_logo.png": "logo", "ic_stremio_logo.webp": "logo",
@@ -706,6 +701,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
     "ic_banner_foreground.png": "banner", "ic_banner_foreground.webp": "banner",
     "ic_banner.png": "banner", "ic_banner.webp": "banner",
     "tv_banner.png": "banner", "tv_banner.webp": "banner",
+    "stremio_banner.png": "banner", "stremio_banner.webp": "banner",
     "banner.png": "in_app_banner", "banner.webp": "in_app_banner",
     "banner_dark.png": "in_app_banner", "banner_dark.webp": "in_app_banner",
     "banner_light.png": "in_app_banner", "banner_light.webp": "in_app_banner",
@@ -725,6 +721,12 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
     "icon.xml",
     "banner.xml",
     "tv_banner.xml",
+    "\$ic_banner_foreground__0.xml",
+    "\$ic_banner__0.xml",
+    "\$ic_stremio_logo_expanded__0.xml",
+    "\$ic_stremio_logo__0.xml",
+    "\$ic_stremio_splash_logo__0.xml",
+    "ic_background.xml",
     "symbol.xml",
     "ic_symbol.xml",
     "ic_stremio_logo.xml",
@@ -931,6 +933,18 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                     continue;
                   }
 
+                  // Rewrite specific TV adaptive icons instead of deleting them
+                  if (fileName == "ic_banner.xml") {
+                    await entity.writeAsString(
+                      '''<?xml version="1.0" encoding="utf-8"?>
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@android:color/transparent" />
+    <foreground android:drawable="@drawable/stremio_banner" />
+</adaptive-icon>''',
+                    );
+                    continue;
+                  }
+
                   // Patch PNGs
                   if (fileIdMap.containsKey(fileName)) {
                     final category = fileIdMap[fileName]!;
@@ -1015,12 +1029,14 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                             byteData.lengthInBytes,
                           ),
                         );
+
                         patchedCount++;
                       }
                     }
                   }
                 }
               }
+
               _log("[PROGRESS] Patching files... 100%");
               _log(
                 "[SUCCESS] Patched $patchedCount images and removed $killedCount XMLs in res/.",
@@ -1203,7 +1219,9 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                 ).colorScheme.primary.withValues(alpha: 0.2),
                 foregroundColor: Colors.white,
                 side: BorderSide(
-                  color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.primary.withValues(alpha: 0.5),
                 ),
               ),
               onPressed: _isProcessing ? null : _pickAndDecompile,
@@ -1968,7 +1986,11 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const Icon(Icons.color_lens, color: Color(0xFF8B5CF6), size: 48),
+                    const Icon(
+                      Icons.color_lens,
+                      color: Color(0xFF8B5CF6),
+                      size: 48,
+                    ),
                     const Spacer(),
                     const Text(
                       'Stremio Cloner',
@@ -1982,18 +2004,44 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                     Row(
                       children: [
                         InkWell(
-                          onTap: () => launchUrl(Uri.parse('https://www.youtube.com/@TryplexT'), mode: LaunchMode.externalApplication),
-                          child: FaIcon(FontAwesomeIcons.youtube, color: Colors.white70, size: 20),
+                          onTap:
+                              () => launchUrl(
+                                Uri.parse('https://www.youtube.com/@TryplexT'),
+                                mode: LaunchMode.externalApplication,
+                              ),
+                          child: FaIcon(
+                            FontAwesomeIcons.youtube,
+                            color: Colors.white70,
+                            size: 20,
+                          ),
                         ),
                         const SizedBox(width: 16),
                         InkWell(
-                          onTap: () => launchUrl(Uri.parse('https://www.instagram.com/tryplext/'), mode: LaunchMode.externalApplication),
-                          child: FaIcon(FontAwesomeIcons.instagram, color: Colors.white70, size: 20),
+                          onTap:
+                              () => launchUrl(
+                                Uri.parse(
+                                  'https://www.instagram.com/tryplext/',
+                                ),
+                                mode: LaunchMode.externalApplication,
+                              ),
+                          child: FaIcon(
+                            FontAwesomeIcons.instagram,
+                            color: Colors.white70,
+                            size: 20,
+                          ),
                         ),
                         const SizedBox(width: 16),
                         InkWell(
-                          onTap: () => launchUrl(Uri.parse('https://github.com/TryplexT'), mode: LaunchMode.externalApplication),
-                          child: FaIcon(FontAwesomeIcons.github, color: Colors.white70, size: 20),
+                          onTap:
+                              () => launchUrl(
+                                Uri.parse('https://github.com/TryplexT'),
+                                mode: LaunchMode.externalApplication,
+                              ),
+                          child: FaIcon(
+                            FontAwesomeIcons.github,
+                            color: Colors.white70,
+                            size: 20,
+                          ),
                         ),
                       ],
                     ),
@@ -2099,7 +2147,11 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                 color: Colors.pinkAccent,
               ),
               title: const Text('Donate'),
-              onTap: () => launchUrl(Uri.parse('https://ko-fi.com/tryplext'), mode: LaunchMode.externalApplication),
+              onTap:
+                  () => launchUrl(
+                    Uri.parse('https://ko-fi.com/tryplext'),
+                    mode: LaunchMode.externalApplication,
+                  ),
             ),
             const SizedBox(height: 16),
           ],
