@@ -81,6 +81,7 @@ flutter:
     - assets/logo_white_801.png
     - assets/my_banner_black_1727.png
     - assets/my_banner_white_1727.png
+    - assets/in_app_images/no background_logo.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

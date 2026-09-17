@@ -1993,10 +1993,10 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const Icon(
-                      Icons.color_lens,
-                      color: Color(0xFF8B5CF6),
-                      size: 48,
+                    Image.asset(
+                      'assets/in_app_images/no background_logo.png',
+                      height: 56,
+                      fit: BoxFit.contain,
                     ),
                     const Spacer(),
                     const Text(
