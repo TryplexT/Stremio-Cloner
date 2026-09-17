@@ -43,6 +43,7 @@ dependencies:
   path_provider: ^2.1.5
   url_launcher: ^6.3.2
   font_awesome_flutter: ^11.0.0
+  wakelock_plus: ^1.5.2
 
 dev_dependencies:
   flutter_test:
