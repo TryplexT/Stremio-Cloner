@@ -49,6 +49,8 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
+            isMinifyEnabled = false
+            isShrinkResources = false
         }
     }
 }
@@ -102,7 +104,7 @@ dependencies {
 
     // Use local source project for AWT mocks
     implementation(project(":androidawt:awtcompat"))
-    implementation(files("libs/apktool.jar"))
+    compileOnly(files("libs/apktool.jar"))
     
     // APK signing (Google's own library, works on Android)
     implementation("com.github.MuntashirAkon:apksig-android:4.4.0")
