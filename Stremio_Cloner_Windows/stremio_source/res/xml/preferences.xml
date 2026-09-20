@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen android:title="@string/label_settings_label"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory>
+        <PreferenceScreen android:icon="@drawable/grid" android:title="@string/label_interface" android:key="prefs_interface">
+            <PreferenceCategory>
+                <ListPreference android:title="@string/label_language" android:key="prefs_interface_language" app:useSimpleSummaryProvider="true" />
+                <ListPreference android:title="@string/label_themes" android:key="prefs_interface_theme" app:useSimpleSummaryProvider="true" />
+                <ListPreference android:entries="@array/pref_platform_type_entries" android:title="@string/label_stremio_tv_settings_platform" android:key="prefs_interface_platform" android:entryValues="@array/pref_platform_type_entries_values" app:useSimpleSummaryProvider="true" />
+                <SwitchPreference android:title="@string/label_settings_blur_unwatched_image" android:key="prefs_blur_unwatched" />
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen android:icon="@drawable/play_outline" android:title="@string/label_playback" android:key="prefs_playback">
+            <PreferenceCategory>
+                <ListPreference android:entries="@array/pref_player_type_entries" android:title="@string/label_stremio_tv_settings_default_player" android:key="prefs_player_type" android:defaultValue="exo_player" android:entryValues="@array/pref_player_type_entries_values" app:useSimpleSummaryProvider="true" />
+                <SwitchPreference android:title="@string/label_settings_hwdec" android:key="prefs_playback_hw_decoding" android:summaryOff="@string/label_stremio_tv_settings_hw_decoding_hint" />
+                <SwitchPreference android:title="@string/label_stremio_tv_settings_tunnelled_playback" android:key="prefs_tunnelled_playback" android:summaryOn="@string/label_stremio_tv_settings_tunnelled_playback_hint" />
+                <SwitchPreference android:title="@string/label_settings_binge" android:key="prefs_playback_binge" />
+                <ListPreference android:entries="@array/pref_frame_rate_matching_entries" android:title="@string/label_stremio_tv_settings_frame_rate_matching_strategy" android:key="prefs_match_frame_rate" android:entryValues="@array/pref_frame_rate_matching_entries_values" app:useSimpleSummaryProvider="true" />
+                <ExtendedSeekBarPreference android:max="180" android:title="@string/label_settings_next_video_popup_duration" android:key="prefs_playback_next_video_notification_duration" app:format="%ds" app:min="0" app:seekBarIncrement="1" app:showSeekBarValue="true" />
+                <ExtendedSeekBarPreference android:max="30" android:title="@string/label_seek_time_duration" android:key="prefs_playback_seek_time" app:format="%ds" app:min="3" app:seekBarIncrement="1" app:showSeekBarValue="true" />
+            </PreferenceCategory>
+            <PreferenceCategory android:title="@string/label_subspicker_audio">
+                <ListPreference android:title="@string/label_stremio_tv_settings_preferred_language" android:key="prefs_audio_language" app:useSimpleSummaryProvider="true" />
+                <ListPreference android:title="@string/label_stremio_tv_settings_secondary_preferred_language" android:key="prefs_secondary_audio_language" app:useSimpleSummaryProvider="true" />
+            </PreferenceCategory>
+            <PreferenceCategory android:title="@string/label_subtitles">
+                <ListPreference android:title="@string/label_stremio_tv_settings_preferred_language" android:key="prefs_subtitles_language" app:useSimpleSummaryProvider="true" />
+                <ListPreference android:title="@string/label_stremio_tv_settings_secondary_preferred_language" android:key="prefs_secondary_subtitles_language" app:useSimpleSummaryProvider="true" />
+                <ExtendedSeekBarPreference android:max="250" android:title="@string/label_subspicker_size" android:key="prefs_subtitles_size" app:format="%d%%" app:min="50" app:seekBarIncrement="5" app:showSeekBarValue="true" />
+                <ExtendedSeekBarPreference android:max="100" android:title="@string/label_subspicker_vertical_offset" android:key="prefs_subtitles_offset" app:format="%d%%" app:min="0" app:seekBarIncrement="1" app:showSeekBarValue="true" />
+                <SwitchPreference android:title="@string/label_bold" android:key="prefs_subtitles_bold" />
+                <com.jaredrummler.android.colorpicker.ColorPreferenceCompat android:title="@string/label_text_color" android:key="prefs_subtitles_text_color" app:cpv_allowCustom="false" app:cpv_colorPresets="@array/pref_subtitle_color_int_entries" app:cpv_colorShape="circle" app:cpv_showAlphaSlider="true" app:cpv_showColorShades="false" />
+                <com.jaredrummler.android.colorpicker.ColorPreferenceCompat android:title="@string/label_background_color" android:key="prefs_subtitles_background_color" app:cpv_allowCustom="false" app:cpv_colorPresets="@array/pref_subtitle_color_int_entries" app:cpv_colorShape="circle" app:cpv_showAlphaSlider="true" app:cpv_showColorShades="false" />
+                <com.jaredrummler.android.colorpicker.ColorPreferenceCompat android:title="@string/label_outline_color" android:key="prefs_subtitles_outline_color" app:cpv_allowCustom="false" app:cpv_colorPresets="@array/pref_subtitle_color_int_entries" app:cpv_colorShape="circle" app:cpv_showAlphaSlider="true" app:cpv_showColorShades="false" />
+                <SwitchPreference android:title="@string/label_stremio_tv_settings_experimental_libass" android:key="prefs_experimental_libass" android:defaultValue="false" />
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen android:icon="@drawable/network" android:title="@string/label_server" android:key="prefs_server">
+            <PreferenceCategory>
+                <ListPreference android:entries="@array/pref_server_torrent_profile_entries" android:title="@string/label_torrent_profile" android:key="prefs_server_torrent_profile" android:defaultValue="default" android:entryValues="@array/pref_server_torrent_profile_entries_values" app:useSimpleSummaryProvider="true" />
+                <SwitchPreference android:title="@string/label_stremio_tv_settings_server_loading_statistics" android:key="prefs_server_loading_statistics" />
+                <EditTextPreference android:title="@string/label_stremio_tv_settings_server_url" android:key="prefs_server_url" app:useSimpleSummaryProvider="true" />
+                <SwitchPreference android:title="@string/label_mobile_run_foreground" android:key="prefs_server_foreground" />
+                <Preference android:title="@string/label_stremio_tv_settings_server_version" android:key="prefs_server_version" app:selectable="false" />
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen android:icon="@drawable/person_outline" android:title="@string/label_account" android:key="prefs_account">
+            <PreferenceCategory>
+                <Preference android:key="prefs_log_out" android:summary="@string/label_log_out" />
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen android:icon="@drawable/about" android:title="@string/label_about" android:key="prefs_about">
+            <PreferenceCategory>
+                <com.stremio.tv.widget.LinkDialogPreference android:title="@string/label_tos" android:key="prefs_terms_and_conditions" app:label="@string/label_stremio_tv_settings_tos_text" app:link="@string/lbl_links_tos" />
+                <com.stremio.tv.widget.LinkDialogPreference android:title="@string/label_privacy_policy" android:key="prefs_privacy_policy" app:label="@string/label_stremio_tv_settings_privacy_policy_text" app:link="@string/lbl_links_privacy_policy" />
+                <Preference android:title="@string/label_stremio_tv_settings_stremio_version" android:key="prefs_about_version" app:selectable="false" />
+            </PreferenceCategory>
+        </PreferenceScreen>
+    </PreferenceCategory>
+</PreferenceScreen>
