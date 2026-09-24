@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="default_preference_brand_color">#ff1b1c1e</color>
+    <color name="default_preference_color_accent">#ff51aaff</color>
+    <color name="default_preference_window_background">#ff202124</color>
+</resources>

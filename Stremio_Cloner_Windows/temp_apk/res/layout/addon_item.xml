@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.stremio.tv.layout.RelativeLayoutCheckable android:orientation="horizontal" android:tag="layout/addon_item_0" android:focusable="true" android:focusableInTouchMode="true" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:background="@drawable/segment_background" android:paddingLeft="10.0dp" android:paddingTop="5.0dp" android:paddingRight="10.0dp" android:paddingBottom="5.0dp" android:duplicateParentState="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingHorizontal="10.0dp" android:paddingVertical="5.0dp">
+        <TextView android:textStyle="bold" android:textColor="@color/season_item_text_color" android:tag="binding_1" android:duplicateParentState="true" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    </LinearLayout>
+</com.stremio.tv.layout.RelativeLayoutCheckable>

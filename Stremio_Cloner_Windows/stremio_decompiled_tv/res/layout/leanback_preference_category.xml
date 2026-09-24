@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:paddingTop="@dimen/lb_preference_category_padding_top" android:paddingBottom="@dimen/lb_preference_category_padding_bottom" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="?android:listPreferredItemPaddingStart" android:paddingEnd="?android:listPreferredItemPaddingEnd"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textAppearance="?android:textAppearanceListItemSmall" android:layout_gravity="start|center" android:id="@android:id/title" android:duplicateParentState="true" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+</FrameLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="exo_controls_fastforward_by_amount_description">
+        <item quantity="one">%d ସେକେଣ୍ଡ ଫାଷ୍ଟ ଫରୱାର୍ଡ କରନ୍ତୁ</item>
+        <item quantity="other">%d ସେକେଣ୍ଡ ଫାଷ୍ଟ ଫରୱାର୍ଡ କରନ୍ତୁ</item>
+    </plurals>
+    <plurals name="exo_controls_rewind_by_amount_description">
+        <item quantity="one">%d ସେକେଣ୍ଡ ରିୱାଇଣ୍ଡ କରନ୍ତୁ</item>
+        <item quantity="other">%d ସେକେଣ୍ଡ ରିୱାଇଣ୍ଡ କରନ୍ତୁ</item>
+    </plurals>
+    <plurals name="mtrl_badge_content_description">
+        <item quantity="one">%d new notification</item>
+        <item quantity="other">%d new notifications</item>
+    </plurals>
+</resources>

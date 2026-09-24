@@ -38,7 +38,12 @@ dependencies:
   flutter_colorpicker: ^1.1.0
   path: ^1.9.1
   file_selector: ^1.0.4
-  file_picker: ^10.3.8
+  file_picker: ^10.3.10
+  permission_handler: ^12.0.1
+  path_provider: ^2.1.5
+  url_launcher: ^6.3.2
+  font_awesome_flutter: ^11.0.0
+  wakelock_plus: ^1.5.2
 
 dev_dependencies:
   flutter_test:
@@ -49,7 +54,8 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -61,6 +67,21 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - assets/logo_black.png
+    - assets/logo_white.png
+    - assets/splash_black.png
+    - assets/splash_white.png
+    - assets/my_banner_black.png
+    - assets/my_banner_white.png
+    - assets/my_expanded_black.png
+    - assets/my_expanded_white.png
+    - assets/logo_black_801.png
+    - assets/logo_white_801.png
+    - assets/my_banner_black_1727.png
+    - assets/my_banner_white_1727.png
+    - assets/in_app_images/no background_logo.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -92,3 +113,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/icon/Stremio_Cloner_icon1.jpg"
+  min_sdk_android: 21

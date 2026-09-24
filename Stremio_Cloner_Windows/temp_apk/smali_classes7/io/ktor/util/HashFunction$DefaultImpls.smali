@@ -1,0 +1,35 @@
+.class public final Lio/ktor/util/HashFunction$DefaultImpls;
+.super Ljava/lang/Object;
+.source "HashFunction.kt"
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingClass;
+    value = Lio/ktor/util/HashFunction;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x19
+    name = "DefaultImpls"
+.end annotation
+
+.annotation runtime Lkotlin/Metadata;
+    k = 0x3
+    mv = {
+        0x2,
+        0x3,
+        0x0
+    }
+    xi = 0x30
+.end annotation
+
+
+# direct methods
+.method public static synthetic update$default(Lio/ktor/util/HashFunction;[BIIILjava/lang/Object;)V
+    .locals 0
+
+    .line 8
+    invoke-static/range {p0 .. p5}, Lio/ktor/util/HashFunction;->update$default(Lio/ktor/util/HashFunction;[BIIILjava/lang/Object;)V
+
+    return-void
+.end method

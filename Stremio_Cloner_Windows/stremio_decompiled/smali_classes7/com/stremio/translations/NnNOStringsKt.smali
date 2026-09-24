@@ -1,0 +1,61 @@
+.class public final Lcom/stremio/translations/NnNOStringsKt;
+.super Ljava/lang/Object;
+.source "NnNOStrings.kt"
+
+
+# annotations
+.annotation runtime Lkotlin/Metadata;
+    d1 = {
+        "\u0000\n\n\u0000\n\u0002\u0018\u0002\n\u0002\u0008\u0005\"\u0017\u0010\u0000\u001a\u00020\u0001\u00a2\u0006\u000e\n\u0000\u0012\u0004\u0008\u0002\u0010\u0003\u001a\u0004\u0008\u0004\u0010\u0005\u00a8\u0006\u0006"
+    }
+    d2 = {
+        "NnNOStrings",
+        "Lcom/stremio/translations/NnNOStringsClass;",
+        "getNnNOStrings$annotations",
+        "()V",
+        "getNnNOStrings",
+        "()Lcom/stremio/translations/NnNOStringsClass;",
+        "stremio-translations_release"
+    }
+    k = 0x2
+    mv = {
+        0x2,
+        0x0,
+        0x0
+    }
+    xi = 0x30
+.end annotation
+
+
+# static fields
+.field private static final NnNOStrings:Lcom/stremio/translations/NnNOStringsClass;
+
+
+# direct methods
+.method static constructor <clinit>()V
+    .locals 1
+
+    .line 2149
+    new-instance v0, Lcom/stremio/translations/NnNOStringsClass;
+
+    invoke-direct {v0}, Lcom/stremio/translations/NnNOStringsClass;-><init>()V
+
+    sput-object v0, Lcom/stremio/translations/NnNOStringsKt;->NnNOStrings:Lcom/stremio/translations/NnNOStringsClass;
+
+    return-void
+.end method
+
+.method public static final getNnNOStrings()Lcom/stremio/translations/NnNOStringsClass;
+    .locals 1
+
+    .line 2148
+    sget-object v0, Lcom/stremio/translations/NnNOStringsKt;->NnNOStrings:Lcom/stremio/translations/NnNOStringsClass;
+
+    return-object v0
+.end method
+
+.method public static synthetic getNnNOStrings$annotations()V
+    .locals 0
+
+    return-void
+.end method

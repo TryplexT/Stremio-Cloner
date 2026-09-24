@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:tag="layout/fragment_magnet_0" android:padding="@dimen/addons_layout_padding" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_marginStart="@dimen/side_menu_content_margin"
+  xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/meta_details_loading_frame" android:tag="binding_1" android:layout_width="match_parent" android:layout_height="match_parent">
+        <ProgressBar android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    </FrameLayout>
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/meta_details_error_frame" android:tag="binding_2" android:layout_width="match_parent" android:layout_height="match_parent">
+        <ImageView android:layout_width="@dimen/error_image_size" android:layout_height="@dimen/error_image_size" android:src="@drawable/error" android:scaleType="centerInside" android:contentDescription="@null" />
+        <TextView android:layout_gravity="center" android:tag="binding_3" android:paddingLeft="@dimen/meta_details_fragment_padding" android:paddingRight="@dimen/meta_details_fragment_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textAlignment="center" android:paddingHorizontal="@dimen/meta_details_fragment_padding" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@android:color/black" android:layout_width="fill_parent" android:layout_height="fill_parent" android:keepScreenOn="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:fitsSystemWindows="false" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <FrameLayout android:layout_gravity="center" android:id="@id/remote_player_surface_frame" android:layout_width="wrap_content" android:layout_height="wrap_content" android:foregroundGravity="clip_horizontal|clip_vertical">
+            <SurfaceView android:id="@id/remote_player_surface" android:layout_width="1.0dip" android:layout_height="1.0dip" />
+            <SurfaceView android:id="@id/remote_subtitles_surface" android:layout_width="1.0dip" android:layout_height="1.0dip" />
+        </FrameLayout>
+    </FrameLayout>
+</RelativeLayout>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Base.Theme.AppCompat" parent="@style/Base.V28.Theme.AppCompat" />
+    <style name="Base.Theme.AppCompat.Light" parent="@style/Base.V28.Theme.AppCompat.Light" />
+    <style name="Base.V14.ThemeOverlay.MaterialComponents.MaterialAlertDialog" parent="@style/ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="android:backgroundDimAmount">0.32</item>
+        <item name="android:checkedTextViewStyle">@style/Widget.MaterialComponents.CheckedTextView</item>
+        <item name="android:dialogCornerRadius">@null</item>
+        <item name="alertDialogStyle">@style/MaterialAlertDialog.MaterialComponents</item>
+        <item name="buttonBarButtonStyle">@style/Widget.MaterialComponents.Button.TextButton.Dialog</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.MaterialComponents.Button.TextButton.Dialog</item>
+        <item name="buttonBarNeutralButtonStyle">@style/Widget.MaterialComponents.Button.TextButton.Dialog.Flush</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.MaterialComponents.Button.TextButton.Dialog</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialog.MaterialComponents.Body.Text</item>
+    </style>
+    <style name="Base.V28.Theme.AppCompat" parent="@style/Base.V26.Theme.AppCompat">
+        <item name="dialogCornerRadius">?android:dialogCornerRadius</item>
+    </style>
+    <style name="Base.V28.Theme.AppCompat.Light" parent="@style/Base.V26.Theme.AppCompat.Light">
+        <item name="dialogCornerRadius">?android:dialogCornerRadius</item>
+    </style>
+    <style name="EdgeToEdgeFloatingDialogTheme" parent="@android:style/Theme.DeviceDefault.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowElevation">0.0dp</item>
+        <item name="android:windowClipToOutline">false</item>
+        <item name="android:windowLayoutInDisplayCutoutMode">@integer/m3c_window_layout_in_display_cutout_mode</item>
+    </style>
+    <style name="LeanbackSwitchCompatStyle" parent="@android:style/Widget.Material.CompoundButton.Switch">
+        <item name="showText">false</item>
+        <item name="track">@drawable/leanback_switch_compat_track</item>
+    </style>
+    <style name="PreferenceThemeOverlayLeanbackBase">
+        <item name="android:textColorPrimary">@color/lb_preference_item_primary_text_color</item>
+        <item name="android:textColorSecondary">@color/lb_preference_item_secondary_text_color</item>
+        <item name="android:windowBackground">@color/default_preference_window_background</item>
+        <item name="android:checkboxStyle">@android:style/Widget.Material.CompoundButton.CheckBox</item>
+        <item name="android:editTextStyle">@style/LeanbackPreference.EditText</item>
+        <item name="android:imageButtonStyle">@null</item>
+        <item name="android:seekBarStyle">@android:style/Widget.Material.SeekBar</item>
+        <item name="android:radioButtonStyle">@android:style/Widget.Material.CompoundButton.RadioButton</item>
+        <item name="android:textColorTertiary">?android:colorAccent</item>
+        <item name="android:titleTextStyle">@style/LeanbackPreference.Title</item>
+        <item name="android:subtitleTextStyle">@style/LeanbackPreference.SubTitle</item>
+        <item name="android:textAppearanceListItem">@style/TextAppearance.LeanbackPreference.ListItem</item>
+        <item name="android:textAppearanceListItemSmall">@style/TextAppearance.LeanbackPreference.Category</item>
+        <item name="android:listPreferredItemPaddingStart">@dimen/lb_preference_item_padding_start</item>
+        <item name="android:listPreferredItemPaddingEnd">@dimen/lb_preference_item_padding_end</item>
+        <item name="android:colorControlNormal">@color/lb_preference_item_primary_text_color_default</item>
+        <item name="android:colorControlActivated">?android:colorAccent</item>
+        <item name="android:titleTextAppearance">@style/TextAppearance.LeanbackPreference.Title.V23</item>
+        <item name="android:subtitleTextAppearance">@style/TextAppearance.LeanbackPreference.SubTitle.V23</item>
+        <item name="android:textAppearanceListItemSecondary">@style/TextAppearance.LeanbackPreference.ListItem.Secondary</item>
+        <item name="android:colorPrimary">@color/default_preference_brand_color</item>
+        <item name="android:colorAccent">@color/default_preference_color_accent</item>
+        <item name="android:switchStyle">@style/LeanbackSwitchCompatStyle</item>
+        <item name="android:titleTextColor">?android:textColorPrimary</item>
+        <item name="android:subtitleTextColor">?android:textColorPrimary</item>
+    </style>
+</resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation android:id="@id/main_navigation" app:startDestination="@id/login"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <action android:id="@id/action_to_meta_details" app:destination="@id/meta_details" />
+    <fragment android:label="@string/label_log_in" android:name="com.stremio.tv.views.login.LoginFragment" android:id="@id/login" />
+    <fragment android:label="@string/label_stremio_tv_nav_home" android:name="com.stremio.tv.views.board.BoardFragment" android:id="@id/board">
+        <deepLink android:id="@id/deepLink" app:uri="stremio:///board" />
+    </fragment>
+    <fragment android:label="@string/label_stremio_tv_nav_search" android:name="com.stremio.tv.views.search.SearchFragment" android:id="@id/search">
+        <argument android:name="query" android:defaultValue="" app:argType="string" />
+        <deepLink android:id="@id/deepLink" app:uri="stremio:///search?search={query}" />
+    </fragment>
+    <fragment android:label="@string/label_stremio_tv_nav_library" android:name="com.stremio.tv.views.library.LibraryFragment" android:id="@id/library">
+        <deepLink android:id="@id/deepLink" app:uri="stremio:///library" />
+    </fragment>
+    <fragment android:label="@string/label_stremio_tv_nav_discover" android:name="com.stremio.tv.views.discover.DiscoverFragment" android:id="@id/discover">
+        <argument android:name="catalogAddonUrl" android:defaultValue="@null" app:argType="string" app:nullable="true" />
+        <argument android:name="type" android:defaultValue="@null" app:argType="string" app:nullable="true" />
+        <argument android:name="id" android:defaultValue="@null" app:argType="string" app:nullable="true" />
+        <argument android:name="genre" android:defaultValue="@null" app:argType="string" app:nullable="true" />
+        <deepLink android:id="@id/deepLink" app:uri="stremio:///discover" />
+        <deepLink android:id="@id/deepLink2" app:uri="stremio:///discover/{catalogAddonUrl}/{type}/{id}?genre={genre}" />
+    </fragment>
+    <fragment android:label="@string/label_stremio_tv_nav_settings" android:name="com.stremio.tv.views.settings.SettingsFragment" android:id="@id/settings">
+        <argument android:name="tab" android:defaultValue="@null" app:argType="string" app:nullable="true" />
+    </fragment>
+    <fragment android:label="@string/label_stremio_tv_nav_addons" android:name="com.stremio.tv.views.addons.AddonsWrapperFragment" android:id="@id/addons">
+        <argument android:name="addonUrl" android:defaultValue="@null" app:argType="string" app:nullable="true" />
+        <argument android:name="type" android:defaultValue="@null" app:argType="string" app:nullable="true" />
+        <argument android:name="catalogId" android:defaultValue="@null" app:argType="string" app:nullable="true" />
+        <deepLink android:id="@id/deepLink" app:uri="stremio:///addons/{type}" />
+        <deepLink android:id="@id/deepLink2" app:uri="stremio:///addons/{type}/{addonUrl}/{catalogId}" />
+        <action android:id="@id/action_to_addon_details" app:destination="@id/addon_details" />
+    </fragment>
+    <fragment android:label="@string/label_addon" android:name="com.stremio.tv.views.addondetails.AddonDetailsFragment" android:id="@id/addon_details">
+        <argument android:name="transportUrl" android:defaultValue="@null" app:argType="string" app:nullable="true" />
+        <deepLink android:id="@id/deepLink" app:uri="stremio://.*manifest.json" />
+    </fragment>
+    <fragment android:label="@string/label_library_details" android:name="com.stremio.tv.views.metadetails.MetaDetailsFragment" android:id="@id/meta_details">
+        <argument android:name="type" app:argType="string" />
+        <argument android:name="id" app:argType="string" />
+        <argument android:name="videoId" android:defaultValue="@null" app:argType="string" app:nullable="true" />
+        <argument android:name="autoPlay" android:defaultValue="false" app:argType="boolean" />
+        <deepLink android:id="@id/deepLink" app:uri="stremio:///detail/{type}/{id}" />
+        <deepLink android:id="@id/deepLink2" app:uri="stremio:///detail/{type}/{id}/{videoId}?autoPlay={autoPlay}" />
+        <action android:id="@id/action_to_player" app:destination="@id/player" />
+    </fragment>
+    <fragment android:label="@string/label_settings_nav_player" android:name="com.stremio.tv.views.player.PlayerFragment" android:id="@id/player">
+        <argument android:name="streamData" app:argType="string" />
+        <argument android:name="streamAddonUrl" android:defaultValue="@null" app:argType="string" app:nullable="true" />
+        <argument android:name="metaAddonUrl" android:defaultValue="@null" app:argType="string" app:nullable="true" />
+        <argument android:name="type" android:defaultValue="@null" app:argType="string" app:nullable="true" />
+        <argument android:name="id" android:defaultValue="@null" app:argType="string" app:nullable="true" />
+        <argument android:name="videoId" android:defaultValue="@null" app:argType="string" app:nullable="true" />
+        <deepLink android:id="@id/deepLink" app:uri="stremio:///player/{streamData}" />
+        <deepLink android:id="@id/deepLink2" app:uri="stremio:///player/{streamData}/{streamAddonUrl}/{metaAddonUrl}/{type}/{id}/{videoId}" />
+    </fragment>
+    <fragment android:label="@string/label_magnet_parsing" android:name="com.stremio.tv.views.magnet.MagnetLinkFragment" android:id="@id/magnet">
+        <deepLink android:id="@id/deepLink" app:uri="magnet:" />
+    </fragment>
+    <fragment android:label="@string/label_user_profiles_switch_profile_title" android:name="com.stremio.tv.views.userprofiles.UserProfilesFragment" android:id="@id/user_profiles" />
+</navigation>

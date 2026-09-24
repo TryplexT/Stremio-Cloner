@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="vertical" android:padding="@dimen/dialog_xlarge_padding" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_stremio_logo_expanded" android:scaleType="fitCenter" android:adjustViewBounds="true" android:maxHeight="@dimen/login_logo_height" android:contentDescription="@null" />
+    <TextView android:textAppearance="?android:textAppearance" android:gravity="center" android:id="@id/dialog_link_label" android:paddingTop="@dimen/dialog_large_padding" android:paddingBottom="@dimen/dialog_medium_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <TextView android:textAppearance="?android:textAppearanceLarge" android:textStyle="bold" android:gravity="center" android:id="@id/dialog_link" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+</LinearLayout>

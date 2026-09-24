@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:tag="layout/fragment_meta_details_0" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/meta_details_background" android:tag="binding_1" android:layout_width="match_parent" android:layout_height="match_parent" android:scaleType="centerCrop" android:contentDescription="@null" />
+    <View android:background="?android:windowBackground" android:layout_width="match_parent" android:layout_height="match_parent" android:alpha="0.85" />
+    <com.stremio.tv.layout.FixedFocusLinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_marginStart="@dimen/side_menu_content_margin" app:fixedFocusViewId="@id/meta_details_list_view">
+        <FrameLayout android:id="@id/meta_details_loading_frame" android:tag="binding_2" android:layout_width="match_parent" android:layout_height="match_parent">
+            <ProgressBar android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </FrameLayout>
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/meta_details_error_frame" android:tag="binding_3" android:layout_width="match_parent" android:layout_height="match_parent">
+            <ImageView android:layout_width="@dimen/error_image_size" android:layout_height="@dimen/error_image_size" android:src="@drawable/error" android:scaleType="centerInside" android:contentDescription="@null" />
+            <TextView android:layout_gravity="center" android:paddingLeft="@dimen/meta_details_fragment_padding" android:paddingRight="@dimen/meta_details_fragment_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_err_no_meta" android:textAlignment="center" android:paddingHorizontal="@dimen/meta_details_fragment_padding" />
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:id="@id/meta_details_frame" android:tag="binding_4" android:paddingTop="@dimen/meta_details_top_padding" android:paddingBottom="@dimen/meta_details_bottom_padding" android:clipChildren="false" android:clipToPadding="false" android:layout_width="match_parent" android:layout_height="match_parent">
+            <LinearLayout android:orientation="vertical" android:layout_width="@dimen/meta_details_section_width" android:layout_height="wrap_content" android:layout_marginStart="@dimen/content_padding_start">
+                <FrameLayout android:layout_width="@dimen/meta_details_logo_width" android:layout_height="@dimen/meta_preview_logo_height">
+                    <ImageView android:layout_gravity="center_vertical" android:id="@id/meta_preview_logo" android:tag="binding_5" android:layout_width="match_parent" android:layout_height="wrap_content" android:contentDescription="@null" />
+                </FrameLayout>
+                <TextView android:textAppearance="@style/TextAppearance.Title" android:ellipsize="end" android:id="@id/meta_details_label" android:tag="binding_6" android:paddingTop="@dimen/meta_details_text_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" />
+                <TextView android:ellipsize="end" android:id="@id/meta_details_video_label" android:tag="binding_7" android:paddingTop="@dimen/meta_details_text_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" />
+                <FrameLayout android:paddingTop="@dimen/meta_details_text_padding" android:layout_width="match_parent" android:layout_height="wrap_content">
+                    <TextView android:textColor="?android:textColorSecondary" android:ellipsize="end" android:id="@id/meta_details_description" android:tag="binding_8" android:layout_width="wrap_content" android:layout_height="wrap_content" android:lines="2" />
+                </FrameLayout>
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:id="@id/meta_details_list_view" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="15.0dp">
+                <androidx.fragment.app.FragmentContainerView android:name="com.stremio.tv.views.metadetails.seasons.SeasonsListFragment" android:id="@id/meta_details_seasons" android:tag="binding_9" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="-10.0dp" />
+                <androidx.fragment.app.FragmentContainerView android:name="com.stremio.tv.views.metadetails.addons.AddonsListFragment" android:id="@id/meta_details_addons" android:tag="binding_10" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="-10.0dp" />
+                <androidx.fragment.app.FragmentContainerView android:name="com.stremio.tv.views.metadetails.videos.VideosListFragment" android:id="@id/meta_details_videos" android:tag="binding_11" android:clipChildren="false" android:clipToPadding="false" android:layout_width="match_parent" android:layout_height="wrap_content" />
+                <androidx.fragment.app.FragmentContainerView android:name="com.stremio.tv.views.metadetails.streams.StreamsListFragment" android:id="@id/meta_details_streams" android:tag="binding_12" android:clipChildren="false" android:clipToPadding="false" android:layout_width="match_parent" android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout android:gravity="bottom" android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_marginStart="@dimen/content_padding_start">
+                <Button android:id="@id/meta_detail_btn_trailer" android:tag="binding_13" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="0.0dp" android:paddingStart="15.0dp" android:paddingEnd="5.0dp" android:layout_marginEnd="10.0dp" />
+                <Button android:id="@id/meta_detail_btn_library" android:tag="binding_14" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="0.0dp" android:paddingStart="15.0dp" android:paddingEnd="5.0dp" android:layout_marginEnd="10.0dp" />
+                <Button android:id="@id/meta_detail_btn_watched" android:tag="binding_15" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="0.0dp" android:paddingStart="15.0dp" android:paddingEnd="5.0dp" android:layout_marginEnd="10.0dp" />
+                <Button android:id="@id/meta_detail_btn_toggle_notifications" android:tag="binding_16" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="0.0dp" android:paddingStart="15.0dp" android:paddingEnd="5.0dp" android:layout_marginEnd="10.0dp" />
+                <Button android:id="@id/meta_detail_btn_rate_like" android:tag="binding_17" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="0.0dp" android:paddingStart="15.0dp" android:paddingEnd="5.0dp" android:layout_marginEnd="10.0dp" />
+                <Button android:id="@id/meta_detail_btn_rate_love" android:tag="binding_18" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="0.0dp" android:paddingStart="15.0dp" android:paddingEnd="5.0dp" android:layout_marginEnd="10.0dp" />
+                <TextView android:textSize="@dimen/meta_details_loading_text_size" android:id="@id/meta_details_streams_label" android:tag="binding_19" android:layout_width="0.0dp" android:layout_height="wrap_content" android:layout_weight="1.0" android:textAlignment="viewEnd" android:layout_marginEnd="@dimen/content_padding_start" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.stremio.tv.layout.FixedFocusLinearLayout>
+</FrameLayout>

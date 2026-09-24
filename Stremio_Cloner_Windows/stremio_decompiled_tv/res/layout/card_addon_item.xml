@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:tag="layout/card_addon_item_0" android:focusable="true" android:focusableInTouchMode="true" android:layout_width="@dimen/addons_card_width" android:layout_height="wrap_content" app:cardBackgroundColor="@color/card_stream_background"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="horizontal" android:padding="@dimen/dialog_large_padding" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <FrameLayout android:background="?cardViewSelectedBackgroundColor" android:padding="@dimen/dialog_small_padding" android:layout_width="@dimen/addons_card_logo_size" android:layout_height="@dimen/addons_card_logo_size">
+            <ImageView android:layout_gravity="center|top" android:tag="binding_1" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerInside" android:contentDescription="@null" />
+        </FrameLayout>
+        <View android:layout_width="@dimen/dialog_large_padding" android:layout_height="fill_parent" />
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textAppearance="@style/TextAppearance.Title" android:tag="binding_2" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                <View android:layout_width="@dimen/dialog_medium_padding" android:layout_height="fill_parent" />
+                <TextView android:textSize="@dimen/addon_card_text_size" android:textColor="?android:textColorSecondary" android:tag="binding_3" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                <View android:layout_width="@dimen/dialog_large_padding" android:layout_height="fill_parent" />
+                <TextView android:textSize="@dimen/meta_details_video_episode_size" android:tag="binding_4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_addon_installed" android:drawablePadding="@dimen/dialog_medium_padding" />
+            </LinearLayout>
+            <TextView android:textSize="@dimen/addon_card_text_size" android:textColor="?android:textColorSecondary" android:tag="binding_5" android:paddingTop="@dimen/dialog_small_padding" android:paddingBottom="@dimen/dialog_small_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingVertical="@dimen/dialog_small_padding" />
+            <TextView android:textSize="@dimen/addon_card_text_size" android:tag="binding_6" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
