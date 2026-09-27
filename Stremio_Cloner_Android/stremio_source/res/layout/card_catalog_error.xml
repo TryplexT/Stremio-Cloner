@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TextView android:textSize="@dimen/meta_poster_text_size" android:gravity="center" android:id="@id/error_message" android:tag="layout/card_catalog_error_0" android:background="?android:windowBackground" android:paddingLeft="@dimen/content_padding_start" android:paddingRight="@dimen/content_padding_start" android:focusable="false" android:focusableInTouchMode="false" android:layout_width="@dimen/catalog_error_card_width" android:layout_height="@dimen/meta_poster_size" android:textAlignment="center" android:paddingHorizontal="@dimen/content_padding_start"
-  xmlns:android="http://schemas.android.com/apk/res/android" />
