@@ -38,10 +38,7 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         multiDexEnabled = true
-
-        ndk {
-            abiFilters.addAll(listOf("armeabi-v7a", "arm64-v8a"))
-        }
+        setProperty("archivesBaseName", "Stremio_Cloner")
     }
 
     buildTypes {
