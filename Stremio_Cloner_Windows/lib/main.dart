@@ -745,6 +745,8 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
     "ic_banner_foreground.xml",
     "ic_stremio_logo_expanded.xml",
     "logo_expanded.xml",
+    "ic_launcher_foreground.xml",
+    "ic_launcher_monochrome.xml",
   ];
 
   Future<void> _runCloneAll() async {
@@ -938,6 +940,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                   String fileName = p.basename(entity.path);
                   File targetEntity = entity;
 
+                    bool wasXmlKilled = false;
                   // Kill XMLs and replace with PNG
                   if (xmlKillList.contains(fileName)) {
                     await targetEntity.delete();
@@ -945,6 +948,7 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                     
                     fileName = fileName.replaceAll('.xml', '.png');
                     targetEntity = File(targetEntity.path.replaceAll('.xml', '.png'));
+                    wasXmlKilled = true;
                   }
 
                   // Rewrite specific TV adaptive icons instead of deleting them
@@ -979,9 +983,11 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                         targetWidth = frame.image.width;
                         targetHeight = frame.image.height;
                       } catch (e) {
-                        _log(
-                          "[WARNING] Could not read dimensions of $fileName. Using master image size.",
-                        );
+                        if (!wasXmlKilled) {
+                          _log(
+                            "[WARNING] Could not read dimensions of $fileName. Using master image size.",
+                          );
+                        }
                       }
 
                       // Composite
@@ -1017,6 +1023,10 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
                       double scaleX = targetWidth / srcWidth;
                       double scaleY = targetHeight / srcHeight;
                       double scale = scaleX < scaleY ? scaleX : scaleY;
+
+                      if (fileName == "ic_launcher_foreground.png" || fileName == "ic_launcher_monochrome.png") {
+                        scale *= 0.66;
+                      }
 
                       double dstWidth = srcWidth * scale;
                       double dstHeight = srcHeight * scale;
@@ -2371,3 +2381,4 @@ class ImageComposerPainter extends CustomPainter {
         oldDelegate.backgroundColor != backgroundColor;
   }
 }
+
