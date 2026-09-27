@@ -1,6 +1,6 @@
 <div align="center">
   <!-- Replace "logo.png" with the actual file path to your logo in the repository -->
-  <img src="logo.png" alt="Streamio Cloner Logo" width="200" />
+  <img src="logo.jpg" alt="Streamio Cloner Logo" width="200" />
   
   # Streamio Cloner
 
