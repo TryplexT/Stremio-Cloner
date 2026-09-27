@@ -241,7 +241,8 @@ class _StremioColorizerHomePageState extends State<StremioColorizerHomePage> {
 
   Future<void> _checkTools() async {
     if (Platform.isWindows) {
-      bool sourceExists = await Directory(sourceFolder).exists();
+      if (!await Directory(sourceFolder).exists()) await Directory(sourceFolder).create();
+bool sourceExists = true;
       bool toolExists = await File(apktoolJar).exists();
 
       bool javaExists = false;

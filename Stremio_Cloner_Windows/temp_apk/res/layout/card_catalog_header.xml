@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:gravity="start" android:orientation="horizontal" android:tag="layout/card_catalog_header_0" android:layout_width="match_parent" android:layout_height="match_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <TextView android:textAppearance="@style/TextAppearance.Title" android:textSize="@dimen/catalog_header_text_size" android:layout_gravity="center_horizontal" android:id="@id/catalog_title" android:paddingBottom="8.0dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" android:textAlignment="center" />
-</LinearLayout>

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <androidx.fragment.app.FragmentContainerView android:name="androidx.navigation.fragment.NavHostFragment" android:id="@id/nav_host_fragment" android:focusable="true" android:focusableInTouchMode="true" android:descendantFocusability="afterDescendants" android:layout_width="match_parent" android:layout_height="match_parent" app:defaultNavHost="true" app:navGraph="@navigation/main_navigation" />
-    <androidx.fragment.app.FragmentContainerView android:name="com.stremio.tv.views.menu.NavigationMenuFragment" android:id="@id/side_menu_fragment" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-</FrameLayout>

@@ -43,3 +43,12 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Cloner Temporary Folders
+stremio_decompiled/
+stremio_decompiled_tv/
+stremio_source/
+temp_apk/
+temp_mobile_apk/
+test_aapt/
+*.apk

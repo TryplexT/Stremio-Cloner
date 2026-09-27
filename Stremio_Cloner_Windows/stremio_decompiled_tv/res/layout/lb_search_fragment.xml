@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.leanback.widget.BrowseFrameLayout android:id="@id/lb_search_frame" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginStart="@dimen/side_menu_content_margin"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout android:orientation="vertical" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="fill_parent">
-        <androidx.leanback.widget.SearchBar android:id="@id/lb_search_bar" android:clipChildren="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/lb_search_bar_padding_top" />
-        <androidx.fragment.app.FragmentContainerView android:name="com.stremio.tv.views.metarow.MetaPreviewFragment" android:id="@id/lb_results_preview_fragment" android:layout_width="fill_parent" android:layout_height="@dimen/meta_preview_fragment_height" />
-        <androidx.fragment.app.FragmentContainerView android:name="com.stremio.tv.views.metarow.CatalogRowsFragment" android:id="@id/lb_results_frame" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="@dimen/meta_preview_content_overlap" />
-    </LinearLayout>
-</androidx.leanback.widget.BrowseFrameLayout>

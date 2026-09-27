@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical" android:tag="layout/card_stream_item_small_layout_0" android:padding="?streamCardPadding" android:layout_width="fill_parent" android:layout_height="fill_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <TextView android:textAppearance="?streamCardNameTextAppearance" android:ellipsize="end" android:tag="binding_1" android:layout_width="fill_parent" android:layout_height="wrap_content" android:maxLines="1" />
-    <TextView android:textAppearance="?streamCardDescriptionTextAppearance" android:ellipsize="end" android:tag="binding_2" android:layout_width="fill_parent" android:layout_height="wrap_content" android:maxLines="1" />
-</LinearLayout>

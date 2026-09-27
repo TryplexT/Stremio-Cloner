@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_marginStart="@dimen/side_menu_content_margin"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <RelativeLayout android:paddingLeft="@dimen/addons_layout_padding" android:paddingTop="@dimen/dialog_large_padding" android:paddingRight="@dimen/addons_layout_padding" android:paddingBottom="@dimen/dialog_large_padding" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingHorizontal="@dimen/addons_layout_padding" android:paddingVertical="@dimen/dialog_large_padding">
-        <Button android:textColor="@color/accent_button_text_color" android:id="@id/add_addon_button" android:paddingLeft="@dimen/button_padding_horizontal" android:paddingRight="@dimen/button_padding_horizontal" android:focusable="true" android:focusableInTouchMode="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/label_add_addon" android:drawablePadding="@dimen/button_icon_padding" android:layout_centerVertical="true" android:layout_alignParentStart="true" android:backgroundTint="@color/accent_button_color" android:paddingHorizontal="@dimen/button_padding_horizontal" />
-        <androidx.leanback.widget.picker.Picker android:id="@id/addons_picker" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" style="?pickerStyle" />
-    </RelativeLayout>
-    <androidx.fragment.app.FragmentContainerView android:name="androidx.leanback.app.VerticalGridSupportFragment" android:id="@id/addons_list_fragment" android:layout_width="match_parent" android:layout_height="match_parent" />
-</LinearLayout>

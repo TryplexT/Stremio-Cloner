@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView android:tag="layout/card_stream_item_expanded_0" android:focusable="false" android:focusableInTouchMode="false" android:layout_width="wrap_content" android:layout_height="wrap_content"
-  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <FrameLayout android:paddingLeft="?streamCardPadding" android:paddingRight="?streamCardPadding" android:layout_width="@dimen/stream_card_expanded_width" android:layout_height="@dimen/stream_card_expanded_height" android:paddingHorizontal="?streamCardPadding">
-        <TextView android:textAppearance="?streamCardDescriptionTextAppearance" android:ellipsize="end" android:layout_gravity="center_vertical" android:tag="binding_1" android:layout_width="match_parent" android:layout_height="wrap_content" android:maxLines="5" android:includeFontPadding="false" />
-    </FrameLayout>
-</androidx.cardview.widget.CardView>

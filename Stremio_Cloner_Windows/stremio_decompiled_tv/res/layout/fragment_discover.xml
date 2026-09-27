@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.stremio.tv.layout.FixedFocusLinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginStart="@dimen/side_menu_content_margin" app:fixedFocusViewId="@id/catalog_rows_fragment"
-  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <androidx.fragment.app.FragmentContainerView android:name="com.stremio.tv.views.metarow.MetaPreviewFragment" android:id="@id/meta_preview_fragment" android:layout_width="fill_parent" android:layout_height="@dimen/meta_preview_fragment_height" />
-    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="@dimen/meta_preview_content_overlap_with_filters">
-        <androidx.leanback.widget.picker.Picker android:id="@id/discover_picker" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/picker_content_padding_start" android:layout_marginRight="@dimen/picker_content_padding_start" android:layout_marginBottom="10.0dip" android:layout_marginHorizontal="@dimen/picker_content_padding_start" style="?pickerStyle" />
-        <androidx.fragment.app.FragmentContainerView android:name="com.stremio.tv.views.metarow.CatalogRowsFragment" android:id="@id/catalog_rows_fragment" android:layout_width="fill_parent" android:layout_height="fill_parent" />
-    </LinearLayout>
-</com.stremio.tv.layout.FixedFocusLinearLayout>

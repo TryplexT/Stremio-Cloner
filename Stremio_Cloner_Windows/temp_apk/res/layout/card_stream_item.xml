@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView android:tag="layout/card_stream_item_0" android:focusable="true" android:focusableInTouchMode="true" android:layout_width="?streamCardWidth" android:layout_height="?streamCardHeight" android:foreground="@drawable/card_stream_foreground" android:layout_marginEnd="@dimen/card_margin_end" android:backgroundTint="?cardViewBackgroundColor"
-  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:binding="http://schemas.android.com/apk/res-auto">
-    <ViewStub android:id="@id/stream_card_stub" android:tag="binding_1" android:layout="?streamCardLayout" android:inflatedId="@id/stream_card_stub_inflated" android:layout_width="match_parent" android:layout_height="match_parent" />
-</androidx.cardview.widget.CardView>
