@@ -18,8 +18,8 @@ Streamio Cloner is a tool designed to unpack, modify, and rebuild the Streamio A
 
 ## Features
 * **Custom App Name:** Easily change the display name of your cloned app so you can identify it in your app drawer.
-* **Custom App Icon:** Upload your own image to replace the default launcher icon.
-* **Unlimited Clones:** Generate as many standalone instances as you need.
+* **Custom App Icon Colour:** Select a custom color to personalize your cloned app's launcher icon.
+* **Unlimited Clones:** Generate as many standalone instances as you need using unique APK prefixes.
 * **Cross-Platform Parity:** Available natively for both **Android** and **Windows**. Both versions share the exact same UI and identical cloning functionality.
 
 ## Releases & Downloads
@@ -32,19 +32,25 @@ Ready-to-use binaries for both platforms are available in the [Releases](../../r
 1. Download the latest release for your preferred platform (Windows or Android).
 2. Open Streamio Cloner and load a clean, base Streamio APK.
 3. Enter your new desired **App Name**.
-4. Select a custom **App Icon** (PNG format is highly recommended).
-5. Click **Clone** and wait for the tool to recompile and sign the new package.
-6. Install your customized APK!
+4. Enter your desired **APK Prefix**. 
+   > ⚠️ **PLEASE NOTE:** Both the App Name and APK Prefix MUST be different for each APK you create to avoid installation conflicts!
+5. Select a custom **App Icon colour**.
+6. Click **Clone** and wait for the tool to recompile and sign the new package.
+7. Install your customized APK!
+
+## Under the Hood
+Streamio Cloner relies on the following excellent open-source utilities to handle the decompilation, recompilation, and signing processes:
+* **Apktool** (`apktool_3.0.3.jar`) - Used for unpacking and rebuilding the Android application packages.
+* **Uber APK Signer** (`uber-apk-signer-1.3.0.jar`) - Used for automated zipaligning and signing of the newly generated clones.
 
 ## Disclaimer
-This tool is intended for personal use and educational purposes (such as learning about APK structure and manifest modification) only. Streamio Cloner is not affiliated with, endorsed by, or connected to the official Stremio team. 
+This tool is intended for personal use and educational purposes only. Streamio Cloner is not affiliated with, endorsed by, or connected to the official Stremio team. 
 
 ---
 
 ## Support
 If you enjoy using Streamio Cloner and want to support its continued development, consider buying me a coffee! 
 
-<!-- Replace "YOUR_KOFI_USERNAME" with your actual Ko-fi handle -->
-<a href="https://ko-fi.com/YOUR_KOFI_USERNAME" target="_blank">
+<a href="https://ko-fi.com/tryplext" target="_blank">
   <img src="https://storage.ko-fi.com/cdn/kofi2.png?v=3" alt="Buy Me A Coffee at ko-fi.com" height="36">
 </a>
