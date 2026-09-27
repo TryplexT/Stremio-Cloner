@@ -40,8 +40,8 @@ Ready-to-use binaries for both platforms are available in the [Releases](../../r
 
 ## Under the Hood
 Streamio Cloner relies on the following excellent open-source utilities to handle the decompilation, recompilation, and signing processes:
-* **Apktool** (`apktool_3.0.3.jar`) - Used for unpacking and rebuilding the Android application packages.
-* **Uber APK Signer** (`uber-apk-signer-1.3.0.jar`) - Used for automated zipaligning and signing of the newly generated clones.
+* **[Apktool](https://github.com/iBotPeaches/Apktool)** (`apktool_3.0.3.jar`) - Used for unpacking and rebuilding the Android application packages.
+* **[Uber APK Signer](https://github.com/patrickfav/uber-apk-signer)** (`uber-apk-signer-1.3.0.jar`) - Used for automated zipaligning and signing of the newly generated clones.
 
 ## Disclaimer
 This tool is intended for personal use and educational purposes only. Streamio Cloner is not affiliated with, endorsed by, or connected to the official Stremio team. 
