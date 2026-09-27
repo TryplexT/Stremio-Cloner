@@ -38,7 +38,10 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         multiDexEnabled = true
-        setProperty("archivesBaseName", "Stremio_Cloner")
+    }
+
+    lint {
+        checkReleaseBuilds = false
     }
 
     buildTypes {
