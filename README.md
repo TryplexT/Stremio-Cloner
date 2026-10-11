@@ -28,6 +28,11 @@ Ready-to-use binaries for both platforms are available in the [Releases](../../r
 * **Windows Version (`.exe`):** Best for modifying and storing APKs on your desktop before sideloading.
 * **Android Version (`.apk`):** Run the cloner directly on your phone or tablet to build and install modified APKs entirely on-device.
 
+## 📺 Video Showcase & Tutorial
+Want to see Stremio Cloner in action? Check out the full walkthrough on YouTube:
+
+[![Stremio Cloner Tutorial](https://img.youtube.com/vi/1kqxiRh2xuY/maxresdefault.jpg)](https://www.youtube.com/watch?v=1kqxiRh2xuY)
+
 ## How to Use
 1. Download the latest release for your preferred platform (Windows or Android).
 2. Open Stremio Cloner and load a clean, base Stremio APK.
